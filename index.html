@@ -18,7 +18,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>세별 수호대</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap">
-<script src="style.js?v=1128e" charset="utf-8"></script>
+<script src="style.js?v=1128g" charset="utf-8"></script>
 
 <div id="app">
   <div id="top">
@@ -87,14 +87,14 @@
   </div></div>
 </div>
 
-<script src="data.js?v=1128e" charset="utf-8"></script>
-<script src="sprites.js?v=1128e" charset="utf-8"></script>
-<script src="pixel.js?v=1128e" charset="utf-8"></script>
-<script src="hero.js?v=1128e" charset="utf-8"></script>
-<script src="kin.js?v=1128e" charset="utf-8"></script>
-<script src="fx.js?v=1128e" charset="utf-8"></script>
-<script src="skills.js?v=1128e" charset="utf-8"></script>
-<script src="story.js?v=1128e" charset="utf-8"></script>
+<script src="data.js?v=1128g" charset="utf-8"></script>
+<script src="sprites.js?v=1128g" charset="utf-8"></script>
+<script src="pixel.js?v=1128g" charset="utf-8"></script>
+<script src="hero.js?v=1128g" charset="utf-8"></script>
+<script src="kin.js?v=1128g" charset="utf-8"></script>
+<script src="fx.js?v=1128g" charset="utf-8"></script>
+<script src="skills.js?v=1128g" charset="utf-8"></script>
+<script src="story.js?v=1128g" charset="utf-8"></script>
 <script>
 (()=>{
 const $=id=>document.getElementById(id), rnd=n=>Math.floor(Math.random()*n);
@@ -297,8 +297,10 @@ let fieldC=null,fieldKey='';
 function field(){const key=[cs,dpr,FW,FH,OX,OY,reg(S.round)].join('|');if(fieldC&&fieldKey===key)return fieldC;fieldKey=key;
   const v=document.createElement('canvas');v.width=Math.max(1,FW*dpr);v.height=Math.max(1,FH*dpr);const c=v.getContext('2d');c.scale(dpr,dpr);
   paintField(c,FW,FH,cs,OX,OY,reg(S.round));return fieldC=v;}
+/* characters are drawn bigger than their cell (feet stay put) so they read on a phone */
+const SPRK=1.4;
 const sprC={};let sprSize=0;
-function sprite(id,st,md,part){md=md||0;part=part||0;const px=Math.max(16,Math.ceil(cs*1.4*dpr));if(px!==sprSize){for(const k in sprC)delete sprC[k];sprSize=px;}
+function sprite(id,st,md,part){md=md||0;part=part||0;const px=Math.max(16,Math.ceil(cs*1.4*SPRK*dpr));if(px!==sprSize){for(const k in sprC)delete sprC[k];sprSize=px;}
   const k=id+st+'|'+md+part;if(sprC[k])return sprC[k];const v=document.createElement('canvas');v.width=v.height=px;const c=v.getContext('2d');
   c.translate(px/2,px/2);c.scale(px/2*.9,px/2*.9);const dk=id.endsWith(':dark');drawSprite(c,dk?id.slice(0,-5):id,st,md,part);
   if(dk){c.setTransform(1,0,0,1,0,0);c.globalCompositeOperation='source-atop';c.fillStyle='rgba(40,0,50,.5)';c.fillRect(0,0,px,px);c.globalCompositeOperation='source-over';}return sprC[k]=v;}
@@ -318,8 +320,8 @@ function drawUnit(x,y,o){const st=o.star||1,ga=cx.globalAlpha,R=cs*(o.big?.62:[.
     if(o.born!=null&&B){const k=Math.min(1,(B.t-o.born)/.25);sx*=k;sy*=k;}
     if(o.pop>0){sx*=1+o.pop;sy*=1+o.pop;}
     if(o.die!=null)rot+=(1-o.die/.45)*1.3*(o.face||1);
-    cx.save();cx.translate(x+ox,y+oy+R*.8);cx.rotate(rot);cx.scale(sx*(o.face||1),sy);const md=o.die!=null||o.flash>0?1:(o.atkT>0||o.castT>0)?2:o.moving?3+(Math.floor(performance.now()/170+(o.ph||0))%2):0;cx.drawImage(sprite(o.spr,st,md,0),-R*1.12,-R*1.92,R*2.24,R*2.24);
-    if(HAS_ARM[o.spr.split(':')[0]]){cx.translate(R*.3,-R*.44);cx.rotate(armAngle(o));cx.translate(-R*.3,R*.44);cx.drawImage(sprite(o.spr,st,md,1),-R*1.12,-R*1.92,R*2.24,R*2.24);}cx.restore();}
+    cx.save();cx.translate(x+ox,y+oy+R*.8);cx.rotate(rot);cx.scale(sx*(o.face||1),sy);const md=o.die!=null||o.flash>0?1:(o.atkT>0||o.castT>0)?2:o.moving?3+(Math.floor(performance.now()/170+(o.ph||0))%2):0;cx.drawImage(sprite(o.spr,st,md,0),-R*1.12*SPRK,R*.107-R*2.03*SPRK,R*2.24*SPRK,R*2.24*SPRK);
+    if(HAS_ARM[o.spr.split(':')[0]]){cx.translate(R*.3,-R*.44);cx.rotate(armAngle(o));cx.translate(-R*.3,R*.44);cx.drawImage(sprite(o.spr,st,md,1),-R*1.12*SPRK,R*.107-R*2.03*SPRK,R*2.24*SPRK,R*2.24*SPRK);}cx.restore();}
   if(B&&o.max&&o.die==null)drawStatus(cx,cs,x,y,R,o,B.t);
   if(o.flash>0){cx.globalAlpha=ga*.55;cx.beginPath();cx.arc(x,y,R*.8,0,7);cx.fillStyle='#fff';cx.fill();cx.globalAlpha=ga;}
   const ringAt=(r,c,w)=>{cx.beginPath();cx.arc(x,y,r,0,7);cx.strokeStyle=c;cx.lineWidth=w;cx.stroke();};
@@ -327,7 +329,7 @@ function drawUnit(x,y,o){const st=o.star||1,ga=cx.globalAlpha,R=cs*(o.big?.62:[.
   cx.textAlign='center';cx.textBaseline='middle';
   if(o.star){cx.font=Math.round(cs*.24)+'px Jua,sans-serif';cx.lineWidth=3;cx.strokeStyle='#141a2e';const t='★'.repeat(o.star);cx.strokeText(t,x,y+R*1.08);cx.fillStyle='#ffc94d';cx.fillText(t,x,y+R*1.08);}
   if(o.items&&o.die==null)o.items.forEach((id,i)=>cx.drawImage(itemCv(id),x-R*1.1+i*R*.56,y+R*.3,R*.56,R*.56));
-  if(o.max&&o.die==null){const w=cs*.8,f=Math.max(0,o.hp/o.max),hy=y-R*1.05-cs*.1;cx.fillStyle='#0b0e1c';cx.fillRect(x-w/2,hy,w,cs*.08);cx.fillStyle=o.side?'#ff6b7a':'#5fd6a8';cx.fillRect(x-w/2,hy,w*f,cs*.08);
+  if(o.max&&o.die==null){const w=cs*.8,f=Math.max(0,o.hp/o.max),hy=y+R*.9-R*2.03*SPRK*.95-cs*.06;cx.fillStyle='#0b0e1c';cx.fillRect(x-w/2,hy,w,cs*.08);cx.fillStyle=o.side?'#ff6b7a':'#5fd6a8';cx.fillRect(x-w/2,hy,w*f,cs*.08);
     if(o.skN){cx.fillStyle='#0b0e1c';cx.fillRect(x-w/2,hy+cs*.09,w,cs*.05);cx.fillStyle='#6fb6ff';cx.fillRect(x-w/2,hy+cs*.09,w*(o.n%o.skN)/o.skN,cs*.05);}}}
 function slotXY(s){return s.z==='b'?[(s.i%COLS+.5)*cs,(3+Math.floor(s.i/COLS)+.5)*cs]:[(s.i+.5)*cs,(BENCH_Y+.5)*cs];}
 /* ---------- story scenes: a dialogue box over the field, tap to go on ---------- */
