@@ -183,7 +183,7 @@ const I18N={
 "이제 넷이서 막아야 한다.":"Now the four of us must hold it back.",
 "저승 문 깊은 곳에서, 무언가 움직였다.  — 시즌 1 끝 —":"Deep beyond the underworld gate, something stirred.  — End of Season 1 —",
 /* page text */
-"세별 수호대":"Star Guardians","라운드":"Round","규칙":"Rules","배치 1/3":"Units 1/3","아이템 빼기":"Remove items","판매":"Sell",
+"세별 수호대":"Star Guardians","세별 수호대 · Star Guardians":"Star Guardians","라운드":"Round","규칙":"Rules","배치 1/3":"Units 1/3","아이템 빼기":"Remove items","판매":"Sell",
 "새로 뽑기":"Reroll","레벨업":"Level up","잠금":"Lock","전투 시작":"Fight!","건너뛰기":"Skip","눌러서 계속":"Tap to continue",
 "하늘에서 가장 찬란하던 금별을 세 별이 시기해 떨어뜨렸어요. 잊힌 금별은 그믐별이 되어 복수했고, 저승 문이 열렸어요. 금별의 환생인 줄 모르는 소년 한별이 세 별의 제자들과 함께 다섯 고을을 넘어요.":
   "Goldstar was the brightest star in the sky, until three jealous stars cast her down. Forgotten, she turned into a dark star and took her revenge, and the underworld gate opened. Hanbyeol, a boy who doesn't know he is Goldstar reborn, sets out with the disciples of the three stars to cross five villages.",
@@ -220,6 +220,9 @@ function i18nWalk(o){if(!o||typeof o!=='object')return;for(const k in o){const v
 if(LANG==='en'){
   for(const o of [RACE,CLS,SYN,UNITS,SK,EN,TAC,DIFF,ITEMS,LEG,MEM,MAPN,MAPT,SPK,SCENES])i18nWalk(o);
   document.documentElement.lang='en';document.title=I18N[document.title]||document.title;
+  /* home-screen name in English: iOS reads this meta, Android the manifest */
+  {const m=document.querySelector('meta[name=apple-mobile-web-app-title]');if(m)m.setAttribute('content','Star Guardians');
+   const mf=document.querySelector('link[rel=manifest]');if(mf)mf.setAttribute('href','manifest-en.json');}
   const tw=document.createTreeWalker(document.getElementById('app'),NodeFilter.SHOW_TEXT);const ns=[];while(tw.nextNode())ns.push(tw.currentNode);
   for(const n of ns){const t=n.nodeValue.trim();if(t&&I18N[t]!==undefined)n.nodeValue=n.nodeValue.replace(t,I18N[t]);}
   for(const e of document.querySelectorAll('[aria-label]')){const t=e.getAttribute('aria-label');if(I18N[t])e.setAttribute('aria-label',I18N[t]);}
