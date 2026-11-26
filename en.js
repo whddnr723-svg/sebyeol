@@ -213,6 +213,9 @@ const I18N={
 "전술":"Tactics",": 3라운드부터 4라운드마다 전술 3개 중 1개를 골라요. 판이 끝날 때까지 이어져요.":": From round 3, every 4 rounds, choose 1 of 3 tactics. They last the whole run.",
 "전설 유닛":"Legendary units",": 5골드짜리 전설 유닛 4종은 레벨 7부터 아주 드물게 상점에 나와요(레벨 9에서도 4%). 금빛 카드로 보여요. 전설 유닛은 판에 놓기만 해도 혼자서 켜지는 고유 조합이 있어요.":
   ": Four 5-gold legends appear rarely from level 7 (4% even at level 9), shown as gold cards. Each has its own synergy that turns on by itself.",
+"마법 계통":"Magic schools",": 마법사의 기본 공격에 종족 마법이 붙어요. 인간의 도술은 세 번에 한 번 적을 묶고, 용족의 마법은 맞은 적 주변까지 터지고, 정령술은 불(화상)·번개(옆 적에게 튐)·바람(느려짐), 동물과 도깨비의 주술은 적의 공격력을 잠깐 25% 떨어뜨려요.":": A mage's basic attack carries its folk's magic. Human Taoist talismans bind the target every third hit, dragon-kin arcane bursts around the target, spirits use their element (fire burns, lightning jumps, wind slows), and beast and goblin hexes cut the target's damage by 25% for a moment.",
+"궁수 종족":"Archer folk",": 궁수도 종족마다 달라요. 인간은 세 번에 한 번 급소를 맞혀 2배, 사냥매의 깃털은 출혈, 바람 정령의 바람 칼날은 적을 뒤로 밀고 느리게, 불도마뱀의 불침은 화상을 입혀요.":": Archers differ by folk too. Humans hit a weak spot every third shot for double damage, the hawk's feathers cause bleeding, the wind spirit's blades push enemies back and slow them, and the salamander's fire darts burn.",
+"암살자 종족":"Assassin folk",": 암살자도 종족마다 달라요. 자객은 독을 묻혀 중독, 먹표범·달빛 늑대·백산은 체력이 절반 아래인 적에게 1.5배, 그림자 도깨비는 세 번에 한 번 연기에 숨어 잠깐 무적, 안개 이무기는 물린 적이 3초 동안 피해를 15% 더 받아요.":": Assassins differ by folk too. The Night Blade poisons, the Ink Panther, Moon Wolf and Baeksan deal 1.5x to enemies under half HP, the Shadow Goblin vanishes in smoke every third hit, and the Mist Serpent's bite makes enemies take 15% more damage for 3 seconds.",
 "50라운드를 버티면 이겨요. 5라운드마다 보스가 나와요.":"Survive 50 rounds to win. A boss comes every 5 rounds."
 };
 /* swap every Korean string inside the game's data objects, in place (U shares the UNITS objects) */

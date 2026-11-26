@@ -57,13 +57,14 @@ function pxHead(p,o,mood,r,I){
 /* tails swing out to the left (away from the weapon) so they show; wings spread behind */
 function pxBack(p,o,st,r){
   const F=r(o.skin),L=r(o.fur2||'#f1ece0');
-  if(o.wings){const W=r(o.wings);p.poly([[18,24],[3,4],[7,18],[0,17],[6,26],[1,30],[12,32]],W);p.poly([[30,24],[45,4],[41,18],[48,17],[42,26],[47,30],[36,32]],W);
+  if(o.wings){const W=r(o.wings),u=o._sw?2:0;p.poly([[18,24],[3,4+u],[7,18+u],[0,17+u],[6,26],[1,30],[12,32]],W);p.poly([[30,24],[45,4+u],[41,18+u],[48,17+u],[42,26],[47,30],[36,32]],W);
     p.line(18,24,3,4,W[2]);p.line(30,24,45,4,W[2]);p.line(16,26,7,18,W[2]);p.line(32,26,41,18,W[2]);}
-  if(o.tail==='bushy'){p.poly([[18,40],[9,46],[3,42],[1,33],[3,27],[7,31],[7,38],[16,37]],F);p.poly([[1,33],[3,27],[6,30],[4,34]],L);}
-  else if(o.tail==='fox'){const n=Math.max(1,st*2-1);for(let i=0;i<n;i++){const a=n>1?Math.PI*(0.95+i*0.38/(n-1)):Math.PI*1.1;
+  const q=o._sw?1:0;
+  if(o.tail==='bushy'){p.poly([[18,40],[9,46],[3-q*2,42-q],[1-q*3,33-q*3],[3-q*2,27-q*4],[7-q,31-q*3],[7,38],[16,37]],F);p.poly([[1-q*3,33-q*3],[3-q*2,27-q*4],[6-q,30-q*3],[4-q*2,34-q*3]],L);}
+  else if(o.tail==='fox'){const n=Math.max(1,st*2-1);for(let i=0;i<n;i++){const a=(n>1?Math.PI*(0.95+i*0.38/(n-1)):Math.PI*1.1)+(q?.12:0);
       for(let k=0;k<8;k++)p.ell(18+Math.cos(a)*k*2.4,42+Math.sin(a)*k*2.4-k*k*.12,3-k*.12,3-k*.12,k>5?L:F);}}
-  else if(o.tail==='thin')for(let i=0;i<20;i++)p.ell(17-i*.75,44-i*1.1+Math.sin(i/2.4)*2,1.6,1.6,F);
-  else if(o.tail==='dragon'){p.poly([[20,42],[10,48],[3,56],[1,61],[5,60],[12,54],[20,48]],F);for(const [x,y] of [[13,48],[8,52],[4,57]])p.poly([[x-2,y],[x-2,y-4],[x+1,y-1]],L);}
+  else if(o.tail==='thin')for(let i=0;i<20;i++)p.ell(17-i*.75,44-i*1.1+Math.sin(i/2.4+(q?1.2:0))*2,1.6,1.6,F);
+  else if(o.tail==='dragon'){p.poly([[20,42],[10,48-q],[3,56-q*3],[1,61-q*4],[5,60-q*3],[12,54-q],[20,48]],F);for(const [x,y] of [[13,48],[8,52],[4,57]])p.poly([[x-2,y],[x-2,y-4],[x+1,y-1]],L);}
 }
 /* legs: clawed paws for fur and scale folk, a floating wisp for spirits */
 function pxLegs(p,o,r,lL,lR){
@@ -71,9 +72,9 @@ function pxLegs(p,o,r,lL,lR){
   if(o.body==='wisp'){const w=r(o.wisp||o.robe);
     p.poly([[14,40],[34,40],[33,50],[29,56],[24,60],[26,63],[19,60],[16,52]],w);p.poly([[18,48],[30,48],[27,56],[22,59]],r(o.wisp2||'#ffffff'));
     p.poly([[15,35],[33,35],[36,46],[12,46]],skirt);p.line(24,36,24,46,skirt[2]);return;}
-  p.poly([[17,44],[23,44],[21,56+lL],[15,56+lL]],pant);p.poly([[26,44],[32,44],[36,56+lR],[30,56+lR]],pant);
+  const fL=o._fL||0,fR=-fL;p.poly([[17,44],[23,44],[21+fL,56+lL],[15+fL,56+lL]],pant);p.poly([[26,44],[32,44],[36+fR,56+lR],[30+fR,56+lR]],pant);
   /* bare paws with three claws */
-  for(const [x,d] of [[17,lL],[33,lR]]){p.ell(x,59+d,5,3,F);p.line(x-4,58+d,x+3,58+d,F[0]);for(const cx of [x-3,x,x+3]){p.set(cx,62+d,'#f4f0e6');p.set(cx+1,62+d,'#f4f0e6');}}
+  for(const [x,d] of [[17+fL,lL],[33+fR,lR]]){p.ell(x,59+d,5,3,F);p.line(x-4,58+d,x+3,58+d,F[0]);for(const cx of [x-3,x,x+3]){p.set(cx,62+d,'#f4f0e6');p.set(cx+1,62+d,'#f4f0e6');}}
   p.poly([[15,35],[33,35],[37,49],[11,49]],skirt);p.line(19,37,17,48,skirt[2]);p.line(29,37,31,48,skirt[2]);p.line(24,36,24,49,skirt[2]);
   if(o.body==='scale')for(let y=38;y<48;y+=3)for(let x=14+(y%2);x<35;x+=4)p.set(x,y,skirt[0]);
 }
@@ -90,28 +91,28 @@ function pxFront(p,o,r,mood,hx,hy){
 }
 /* who each folk is: head, body kind, race badge, fur and outfit colours, class (war blade, arc bow, mag staff, asn dagger) */
 const KIN={
-  wolf:{head:'canine',body:'fur',rc:'moon',skin:'#9aa0b5',fur2:'#e8ecf4',eye:'#ffd23a',tail:'bushy',ruff:1,k:'war',robe:'#4a5a7a',acc:'#c0303c'},
+  wolf:{head:'canine',body:'fur',rc:'moon',claw:1,skin:'#9aa0b5',fur2:'#e8ecf4',eye:'#ffd23a',tail:'bushy',ruff:1,k:'war',robe:'#4a5a7a',acc:'#c0303c'},
   bear:{head:'bear',body:'fur',rc:'moon',skin:'#9c6a45',fur2:'#e8c9a0',eye:'#5a3a1a',k:'war',robe:'#6a5a3a',acc:'#b8c0d0'},
-  fox:{head:'canine',fox:1,body:'fur',rc:'moon',skin:'#ee8a34',fur2:'#fff4e8',eye:'#ffd23a',tail:'fox',ruff:1,k:'mag',robe:'#7a5cc9',acc:'#e0a93a'},
-  panther:{head:'cat',body:'fur',rc:'moon',skin:'#3a3a4a',fur2:'#5a5a6a',eye:'#c8e04a',tail:'thin',k:'asn',robe:'#2a2a36',acc:'#8a5cf0'},
-  hawk:{head:'hawk',body:'fur',rc:'moon',skin:'#8a5a3a',fur2:'#f7f4ec',eye:'#ffd23a',wings:'#7a4a2a',k:'arc',robe:'#6a4a2a',acc:'#e0a93a'},
-  wolfking:{head:'canine',body:'fur',rc:'moon',skin:'#e6ebf7',fur2:'#ffffff',eye:'#3d8bff',tail:'bushy',ruff:1,fangs:1,moon:1,k:'asn',robe:'#2f3a6a',acc:'#ffc94d'},
-  ember:{head:'spirit',body:'wisp',rc:'moon',hairT:'flame',skin:'#f08a4a',eye:'#ffe566',marks:'#ffd24a',wisp:'#ff7a2f',wisp2:'#ffd24a',k:'mag',robe:'#8a2a1a',acc:'#ffb347'},
-  rock:{head:'goblin',body:'fur',rc:'moon',hairT:'crystal',skin:'#8b8fa3',fur2:'#6f7387',eye:'#ffe566',k:'war',robe:'#5a5a6a',acc:'#6fe3ff'},
-  shade:{head:'goblin',body:'wisp',rc:'moon',hairT:'smoke',skin:'#7a62b8',eye:'#fff6c8',wisp:'#3a2a5c',wisp2:'#7a62b8',k:'asn',robe:'#2a1f40',acc:'#8a6af0'},
-  wind:{head:'spirit',body:'wisp',rc:'star',hairT:'cloud',skin:'#bfeee8',eye:'#2a8a8a',marks:'#5fbfb4',wisp:'#bff6ee',wisp2:'#ffffff',k:'arc',robe:'#5fbfb4',acc:'#ffffff'},
-  bolt:{head:'spirit',body:'wisp',rc:'star',hairT:'spark',skin:'#ffe9a0',eye:'#c06a10',marks:'#e0a020',wisp:'#ffd93b',wisp2:'#fff6c8',k:'mag',robe:'#e0a020',acc:'#ffffff'},
+  fox:{arm:'fire',el:'#7fd8ff',head:'canine',fox:1,body:'fur',rc:'moon',skin:'#ee8a34',fur2:'#fff4e8',eye:'#ffd23a',tail:'fox',ruff:1,k:'mag',robe:'#7a5cc9',acc:'#e0a93a'},
+  panther:{arm:'stalk',head:'cat',body:'fur',rc:'moon',skin:'#3a3a4a',fur2:'#5a5a6a',eye:'#c8e04a',tail:'thin',k:'asn',robe:'#2a2a36',acc:'#8a5cf0'},
+  hawk:{arm:'talon',head:'hawk',body:'fur',rc:'moon',skin:'#8a5a3a',fur2:'#f7f4ec',eye:'#ffd23a',wings:'#7a4a2a',k:'arc',robe:'#6a4a2a',acc:'#e0a93a'},
+  wolfking:{arm:'stalk',head:'canine',body:'fur',rc:'moon',skin:'#e6ebf7',fur2:'#ffffff',eye:'#3d8bff',tail:'bushy',ruff:1,fangs:1,moon:1,k:'asn',robe:'#2f3a6a',acc:'#ffc94d'},
+  ember:{arm:'fire',el:'#ff7a2f',head:'spirit',body:'wisp',rc:'moon',hairT:'flame',skin:'#f08a4a',eye:'#ffe566',marks:'#ffd24a',wisp:'#ff7a2f',wisp2:'#ffd24a',k:'mag',robe:'#8a2a1a',acc:'#ffb347'},
+  rock:{head:'goblin',body:'fur',rc:'moon',hairT:'crystal',skin:'#8b8fa3',fur2:'#6f7387',eye:'#ffe566',k:'club',robe:'#5a5a6a',acc:'#6fe3ff'},
+  shade:{arm:'shadow',el:'#8a6af0',head:'goblin',body:'wisp',rc:'moon',hairT:'smoke',skin:'#7a62b8',eye:'#fff6c8',wisp:'#3a2a5c',wisp2:'#7a62b8',k:'asn',robe:'#2a1f40',acc:'#8a6af0'},
+  wind:{arm:'wind',el:'#bff6ee',head:'spirit',body:'wisp',rc:'star',hairT:'cloud',skin:'#bfeee8',eye:'#2a8a8a',marks:'#5fbfb4',wisp:'#bff6ee',wisp2:'#ffffff',k:'arc',robe:'#5fbfb4',acc:'#ffffff'},
+  bolt:{arm:'bolt',el:'#ffe14a',head:'spirit',body:'wisp',rc:'star',hairT:'spark',skin:'#ffe9a0',eye:'#c06a10',marks:'#e0a020',wisp:'#ffd93b',wisp2:'#fff6c8',k:'mag',robe:'#e0a020',acc:'#ffffff'},
   whelp:{head:'dragon',body:'scale',rc:'star',skin:'#6ab04a',fur2:'#f3e3a0',eye:'#ffd23a',tail:'dragon',k:'war',robe:'#3a6a2a',acc:'#e0a93a'},
-  salam:{head:'dragon',body:'scale',rc:'star',fire:1,skin:'#f07a2f',fur2:'#ffd08a',horn:'#8a2a1a',eye:'#ffe566',tail:'dragon',k:'arc',robe:'#8a3a1a',acc:'#ffb347'},
-  stardrake:{head:'dragon',body:'scale',rc:'star',skin:'#7a86f0',fur2:'#dfe4ff',horn:'#ffc94d',eye:'#ffd23a',tail:'dragon',wings:'#5a64d0',k:'mag',robe:'#2a2a6a',acc:'#ffc94d'},
-  wyvern:{head:'serpent',body:'scale',rc:'star',skin:'#3a9a9a',fur2:'#dff6ff',eye:'#ffd23a',tail:'dragon',k:'asn',robe:'#1f4a55',acc:'#9fd6d0'},
-  elder:{head:'dragon',body:'scale',rc:'star',skin:'#d0403a',fur2:'#ffd9a0',horn:'#ffc94d',ridge:'#ffc94d',eye:'#ffd23a',tail:'dragon',wings:'#a83030',k:'mag',robe:'#6a1a1a',acc:'#ffc94d'},
+  salam:{arm:'salam',el:'#ff8a3d',head:'dragon',body:'scale',rc:'star',fire:1,skin:'#f07a2f',fur2:'#ffd08a',horn:'#8a2a1a',eye:'#ffe566',tail:'dragon',k:'arc',robe:'#8a3a1a',acc:'#ffb347'},
+  stardrake:{arm:'drake',el:'#a9b6ff',head:'dragon',body:'scale',rc:'star',skin:'#7a86f0',fur2:'#dfe4ff',horn:'#ffc94d',eye:'#ffd23a',tail:'dragon',wings:'#5a64d0',k:'mag',robe:'#2a2a6a',acc:'#ffc94d'},
+  wyvern:{arm:'serpent',el:'#9fe3ff',head:'serpent',body:'scale',rc:'star',skin:'#3a9a9a',fur2:'#dff6ff',eye:'#ffd23a',tail:'dragon',k:'asn',robe:'#1f4a55',acc:'#9fd6d0'},
+  elder:{arm:'drake',el:'#ff6a3a',head:'dragon',body:'scale',rc:'star',skin:'#d0403a',fur2:'#ffd9a0',horn:'#ffc94d',ridge:'#ffc94d',eye:'#ffd23a',tail:'dragon',wings:'#a83030',k:'mag',robe:'#6a1a1a',acc:'#ffc94d'},
   duduri:{head:'goblin',body:'fur',hairT:'wild',oneHorn:1,skin:'#6fa8dc',fur2:'#26232c',eye:'#ffe566',k:'club',robe:'#c89a3a',acc:'#e8c94d'},
-  baeksan:{head:'canine',tiger:1,body:'fur',ruff:1,fangs:1,skin:'#eef0f6',fur2:'#ffffff',eye:'#3d8bff',tail:'bushy',k:'asn',robe:'#3a5a9a',acc:'#e0a93a'},
-  mireu:{head:'serpent',body:'scale',skin:'#3a50a0',fur2:'#dff6ff',horn:'#ffc94d',eye:'#ffd23a',tail:'dragon',k:'mag',robe:'#1f2a60',acc:'#ffc94d'},
+  baeksan:{arm:'stalk',head:'canine',tiger:1,body:'fur',ruff:1,fangs:1,skin:'#eef0f6',fur2:'#ffffff',eye:'#3d8bff',tail:'bushy',k:'asn',robe:'#3a5a9a',acc:'#e0a93a'},
+  mireu:{arm:'drake',el:'#7fd8ff',head:'serpent',body:'scale',skin:'#3a50a0',fur2:'#dff6ff',horn:'#ffc94d',eye:'#ffd23a',tail:'dragon',k:'mag',robe:'#1f2a60',acc:'#ffc94d'},
   gaon:{head:'ghost',body:'wisp',skin:'#b8c4e8',wisp:'#8a94c8',wisp2:'#c8d0f0',k:'war',robe:'#3a4470',acc:'#c8d0e0'}};
 function kinOpts(d,st){
-  const W={war:'blade',arc:'bow',mag:'staff',asn:'dagger',club:'club'}[d.k];
+  const W=d.arm?d.arm:d.claw?'claw':d.fist?'fist':{war:'blade',arc:'bow',mag:'staff',asn:'dagger',club:'club'}[d.k];
   const o=Object.assign({},d,{weapon:W,trim:d.acc,orb:d.acc,belt:'#6a4a2a',knot:d.acc,pant:'#2f3560',noSheath:1,
     wcol:W==='club'?'#9a6a3a':W==='bow'?'#9a6a3a':'#c8d0dc',hilt:'#4a3a30',guard:'#8a6a4a'});
   if(d.head!=='hawk')o.wings=st>=2?d.wings:null;
@@ -121,4 +122,5 @@ function kinOpts(d,st){
   return o;}
 /* pxHero with folk head, tail, wings, paws and badge */
 function pxKin(id,st,mood){const o=kinOpts(KIN[id],st);return pxHero(Object.assign(o,{_back:pxBack,_head:pxHead,_legs:pxLegs,_front:pxFront,_st:st}),mood);}
+for(const id in KIN){STRIKE[id]=1;WEAPON[id]=kinOpts(KIN[id],1).weapon;}
 for(const id in KIN)PIXU[id]=(st,g,mood)=>pxKin(id,Math.max(1,Math.min(3,st||1)),mood);

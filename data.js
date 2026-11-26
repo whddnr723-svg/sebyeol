@@ -63,7 +63,7 @@ const TAC={interest:['\ubd80\uc790\uc758 \uae08\uace0','\uc774\uc790\ub97c \ucd5
 const DIFF={normal:['\ubcf4\ud1b5',1,1,1],hard:['\uc5b4\ub824\uc6c0',1.3,1.2,1.1],hell:['\uc9c0\uc625',1.7,1.45,1.2]};
 const HP0=460,HPG=1.12,DMG0=50,DMGG=1.08,PT0=3,PTG=1.25;
 /* attack motion per character */
-const MOT={sword:'slash',wolf:'pounce',sling:'shoot',ember:'cast',hawk:'swoop',mage:'cast',rock:'smash',wind:'shoot',bear:'smash',fox:'cast',archer:'shoot',bolt:'cast',
+const MOT={sword:'slash',wolf:'maul',sling:'shoot',ember:'cast',hawk:'swoop',mage:'cast',rock:'smash',wind:'shoot',bear:'smash',fox:'cast',archer:'shoot',bolt:'cast',
   grunt:'slash',bat:'swoop',skull:'shoot',ogre:'smash',shield:'slash',shaman:'cast',bomber:'pounce',boss:'smash'};
 /* 11/26: \uc6a9\uc871, \uc554\uc0b4\uc790, \uc720\ub2db 7\uc885, \uc544\uc774\ud15c */
 RACE.dragon={n:'\uc6a9\uc871',c:'#9bd36a'};CLS.asn={n:'\uc554\uc0b4\uc790'};
