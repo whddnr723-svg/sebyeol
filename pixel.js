@@ -91,10 +91,11 @@ Object.assign(PXC,{pink:['#ffd0d6','#ee8e98','#b85a66'],gray2:['#c8ccd8','#9aa0b
   eyeY:['#fff7b0','#ffe566','#d6b62a'],eyeB:['#cfe8ff','#3d8bff','#1f4f9a'],eyeG:['#f0ffb0','#c8e04a','#8aa020'],
   flameO:['#ffe9a8','#ff8a3d','#c0461a'],flameB:['#dff4ff','#5aa2ff','#2a5ab0'],flameY:['#fffbe0','#ffd24a','#e09a1a'],
   rock:['#c8ccda','#8b8fa3','#5f6377'],shade:['#7a62b8','#3a2a5c','#1d1433'],cream:['#fff7e6','#e8d2b0','#b89a70'],moss:['#9ad06a','#5f9a3c','#3a6a24']});
-function pxEyes(p,y,col,mood,xs){for(const [i,ex] of (xs||[14,27]).entries()){
-  if(mood===1){p.line(ex,y+2,ex+4,y+2,PX_INK);continue;}
-  p.rect(ex,y,5,4,col);p.rect(ex+2,y,2,4,PX_INK);p.set(ex+1,y,'#fff');
-  if(mood===2){if(i===0)p.line(ex-1,y-2,ex+4,y-1,PX_INK);else p.line(ex,y-1,ex+5,y-2,PX_INK);}}}
+function pxEyes(p,y,col,mood,xs){for(const [i,ex] of (xs||[14,27]).entries()){const L=i===0;
+  if(mood===1){p.line(ex,y+2,ex+4,y+1,PX_INK);continue;}
+  p.rect(ex+1,y+1,3,2,col);p.set(ex+2,y+1,PX_INK);p.set(ex+2,y+2,PX_INK);p.set(L?ex+1:ex+3,y+1,'#ffffff');
+  p.line(ex,L?y:y+1,ex+4,L?y+1:y,PX_INK);p.set(L?ex-1:ex+5,y-1,PX_INK);p.line(L?ex+1:ex+3,y+3,L?ex+3:ex+1,y+3,PX_INK);
+  const st=mood===2?1:0;if(L)p.line(ex-1,y-2-st,ex+3,y-1+st,PX_INK);else p.line(ex+1,y-1+st,ex+5,y-2-st,PX_INK);}}
 function pxFlame(p,cx,cy,w,h,r){p.ell(cx,cy+h*.3,w,h*.55,r);p.poly([[cx-w*.85,cy+h*.15],[cx-w*.2,cy-h*.55],[cx,cy-h],[cx+w*.35,cy-h*.45],[cx+w*.85,cy+h*.15]],r);}
 /* sitting four-legged beast; o: body, belly, ears 'point'|'round', inner, tail 'bushy'|'thin'|'fox'|null, tails, eye, extra, stripes */
 function pxBeast(st,mood,o){const p=Pix(46,58),B=o.body,W=o.belly||PXC.white;
@@ -108,11 +109,16 @@ function pxBeast(st,mood,o){const p=Pix(46,58),B=o.body,W=o.belly||PXC.white;
   if(o.ears==='round'){for(const ex of [10.5,35.5]){p.ell(ex,8,5,5,B);p.ell(ex,8.5,2.4,2.4,o.inner||W);}}
   else{p.poly([[6,15],[9,0],[17,10]],B);p.poly([[40,15],[37,0],[29,10]],B);p.poly([[9,12],[9.5,5],[14,10]],o.inner||PXC.pink);p.poly([[37,12],[36.5,5],[32,10]],o.inner||PXC.pink);
     if(o.earTip){p.poly([[8,4],[9,0],[11,3]],o.earTip);p.poly([[38,4],[37,0],[35,3]],o.earTip);}}
-  p.ell(23,18,14,12,B);p.ell(23,24,8,5.5,o.muzzle||W);
+  if(o.ruff){const R=o.ruffc||W;for(const s of [-1,1]){const X=x=>23+s*x;p.poly([[X(10),16],[X(17),20],[X(12),22],[X(17),26],[X(11),27],[X(14),31],[X(7),29]],R);}
+    p.poly([[14,30],[32,30],[29,34],[26,32],[23,36],[20,32],[17,34]],R);}
+  p.ell(23,18,14,12,B);
+  if(o.snout){p.poly([[16,20],[30,20],[28,28],[23,31],[18,28]],o.muzzle||W);}else p.ell(23,24,8,5.5,o.muzzle||W);
   if(o.stripes){p.line(22,7,22,11,o.stripes);p.line(24,7,24,11,o.stripes);p.line(10,17,13,18,o.stripes);p.line(36,17,33,18,o.stripes);}
   pxEyes(p,15,o.eye||PXC.eyeY,mood);
-  p.rect(21,21,4,2,o.nose||PXC.ink);p.line(23,23,23,25,PX_INK);
-  if(mood===2){p.rect(20,25,6,2,'#7a2030');p.set(20,25,'#fff');p.set(25,25,'#fff');}else{p.line(19,26,22,25,PX_INK);p.line(27,26,24,25,PX_INK);}
+  const ny=o.snout?26:21;p.rect(21,ny,4,2,o.nose||PXC.ink);p.line(23,ny+2,23,ny+3,PX_INK);
+  if(mood===2||o.fangs){p.rect(20,ny+4,6,1,'#7a2030');p.poly([[20,ny+3],[21,ny+3],[20.5,ny+6]],'#ffffff');p.poly([[25,ny+3],[26,ny+3],[25.5,ny+6]],'#ffffff');}
+  else{p.line(19,ny+4,22,ny+3,PX_INK);p.line(27,ny+4,24,ny+3,PX_INK);}
+  if(o.claws)for(const x of [13,16,28,31])p.line(x,55,x,57,'#ffffff');
   if(o.extra)o.extra(p);p.outline(PX_OL);return p;}
 function pxBird(st,mood){const p=Pix(46,58),wing=PXC.brown,wl=[0,9,11,13][st],fl=mood===3?-4:mood===4?3:0;
   for(const s of [-1,1]){p.ell(23+s*13,32+fl,6+st,wl+2,wing);if(st>2)p.ell(23+s*17,42,3,4,PXC.gold);for(let i=0;i<3;i++)p.line(23+s*(10+i*2),26+i*3,23+s*(13+i*2),40+i*3,PXC.brown[2]);}

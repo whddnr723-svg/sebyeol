@@ -18,7 +18,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>세별 수호대</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap">
-<script src="style.js?v=1128b" charset="utf-8"></script>
+<script src="style.js?v=1128e" charset="utf-8"></script>
 
 <div id="app">
   <div id="top">
@@ -87,13 +87,14 @@
   </div></div>
 </div>
 
-<script src="data.js?v=1128b" charset="utf-8"></script>
-<script src="sprites.js?v=1128b" charset="utf-8"></script>
-<script src="pixel.js?v=1128b" charset="utf-8"></script>
-<script src="hero.js?v=1128b" charset="utf-8"></script>
-<script src="fx.js?v=1128b" charset="utf-8"></script>
-<script src="skills.js?v=1128b" charset="utf-8"></script>
-<script src="story.js?v=1128b" charset="utf-8"></script>
+<script src="data.js?v=1128e" charset="utf-8"></script>
+<script src="sprites.js?v=1128e" charset="utf-8"></script>
+<script src="pixel.js?v=1128e" charset="utf-8"></script>
+<script src="hero.js?v=1128e" charset="utf-8"></script>
+<script src="kin.js?v=1128e" charset="utf-8"></script>
+<script src="fx.js?v=1128e" charset="utf-8"></script>
+<script src="skills.js?v=1128e" charset="utf-8"></script>
+<script src="story.js?v=1128e" charset="utf-8"></script>
 <script>
 (()=>{
 const $=id=>document.getElementById(id), rnd=n=>Math.floor(Math.random()*n);
@@ -125,7 +126,7 @@ function buy(i){if(S.phase!=='prep')return false;const id=S.shop[i];if(!id)retur
   let slot=S.bench.indexOf(null);
   if(slot<0){if(countOf(id,1)<2){toast('대기석이 꽉 찼어요');return false;}
     S.gold-=d.cost;S.shop[i]=null;const t=all().find(x=>x.u.id===id&&x.u.star===1);
-    const o=all().filter(x=>x.u.id===id&&x.u.star===1&&x!==t)[0];const its=[...(t.u.items||[]),...(o.u.items||[])];t.u.items=its.slice(0,2);S.bag.push(...its.slice(2));arr(o.z)[o.i]=null;t.u.star=2;t.u.popAt=performance.now();merge();if(t.u.star===2)toast('★★ '+d.n+' 완성!',skText(id,2),2000);ui();return true;}
+    const o=all().filter(x=>x.u.id===id&&x.u.star===1&&x.u!==t.u)[0];const its=[...(t.u.items||[]),...(o.u.items||[])];t.u.items=its.slice(0,2);S.bag.push(...its.slice(2));arr(o.z)[o.i]=null;t.u.star=2;t.u.popAt=performance.now();merge();if(t.u.star===2)toast('★★ '+d.n+' 완성!',skText(id,2),2000);ui();return true;}
   S.gold-=d.cost;S.shop[i]=null;S.bench[slot]={uid:uid++,id,star:1,popAt:performance.now()};merge();ui();return true;}
 function reroll(){if(S.phase!=='prep'||S.gold<rrCost())return false;S.gold-=rrCost();rollShop();ui();return true;}
 function buyXp(){if(S.phase!=='prep'||S.gold<4||S.level>=9)return false;S.gold-=4;addXp(4);ui();return true;}

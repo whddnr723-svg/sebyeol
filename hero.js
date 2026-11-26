@@ -4,10 +4,12 @@
 function hx(c){if(typeof c!=='string'||c[0]!=='#')return null;return [parseInt(c.slice(1,3),16),parseInt(c.slice(3,5),16),parseInt(c.slice(5,7),16)];}
 const toHex=a=>'#'+a.map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0')).join('');
 function ramp(base){const b=hx(base);return [toHex(b.map((v,i)=>v+(255-v)*.38+[12,6,-10][i])),base,toHex(b.map((v,i)=>v*.58+[10,14,42][i]))];}
+/* any 3-tone array is re-ramped from its base colour so every character shares one hue-shifted light */
+const RCACHE={};function rampOf(p){const b=p[1];if(typeof b!=='string'||b[0]!=='#')return p;return RCACHE[b]||(RCACHE[b]=ramp(b));}
 function Pix2(W,H){
   let px=new Array(W*H).fill(null);
   const set=(x,y,c)=>{x=Math.floor(x);y=Math.floor(y);if(x>=0&&y>=0&&x<W&&y<H&&c)px[y*W+x]=c;};
-  const tone=(v,p)=>typeof p==='string'?p:v>.34?p[2]:v<-.42?p[0]:p[1];
+  const tone=(v,p0)=>{if(typeof p0==='string')return p0;const p=rampOf(p0);return v>.34?p[2]:v<-.42?p[0]:p[1];};
   const ell=(cx,cy,rx,ry,p)=>{for(let y=Math.floor(cy-ry);y<=cy+ry;y++)for(let x=Math.floor(cx-rx);x<=cx+rx;x++){const nx=(x+.5-cx)/rx,ny=(y+.5-cy)/ry;if(nx*nx+ny*ny<=1)set(x,y,tone(nx*.75+ny*.55,p));}};
   const rect=(x0,y0,w,h,p)=>{for(let y=y0;y<y0+h;y++)for(let x=x0;x<x0+w;x++)set(x,y,tone(((x+.5-x0)/w-.5)*1.7+((y+.5-y0)/h-.5)*.4,p));};
   const poly=(pts,p)=>{let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;for(const [x,y] of pts){x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y);}
@@ -33,9 +35,11 @@ function pxHero(o,mood){
   /* cape and ribbons blowing right */
   if(cape){p.poly([[15,23],[33,23],[45,48],[40,47],[37,56],[31,52],[26,60],[12,60]],cape);p.line(34,30,40,46,cape[2]);p.line(28,34,30,52,cape[2]);p.line(20,40,19,56,cape[2]);}
   if(o.ribbon){const rb=r(o.ribbon);p.poly([[28,6],[40,3],[44,7],[36,8]],rb);p.poly([[28,8],[38,11],[41,15],[33,12]],rb);}
+  if(o._back)o._back(p,o,o._st||1,r);
   if(W==='blade'&&!o.noSheath){p.poly([[13,36],[16,37],[9,52],[6,51]],r(o.sheath||'#3a2a2e'));p.line(12,40,14,41,guard[1]);}
   /* legs or a long robe */
-  if(o.long){p.poly([[14,35],[34,35],[39,60],[9,60]],skirt);p.line(24,36,24,60,trim[1]);p.line(19,40,16,59,skirt[2]);p.line(29,40,32,59,skirt[2]);
+  if(o._legs)o._legs(p,o,r,lL,lR);
+  else if(o.long){p.poly([[14,35],[34,35],[39,60],[9,60]],skirt);p.line(24,36,24,60,trim[1]);p.line(19,40,16,59,skirt[2]);p.line(29,40,32,59,skirt[2]);
     p.ell(17,61,4,2,boot);p.ell(31,61,4,2,boot);}
   else{p.poly([[17,44],[23,44],[21,57+lL],[15,57+lL]],pant);p.poly([[26,44],[32,44],[36,57+lR],[30,57+lR]],pant);p.line(18,50+lL,20,50+lL,pant[0]);p.line(31,50+lR,33,50+lR,pant[0]);
     p.poly([[13,56+lL],[22,56+lL],[22,62+lL],[12,62+lL]],boot);p.poly([[29,56+lR],[38,56+lR],[39,62+lR],[29,62+lR]],boot);p.line(13,56+lL,22,56+lL,boot[0]);p.line(29,56+lR,38,56+lR,boot[0]);
@@ -63,6 +67,8 @@ function pxHero(o,mood){
   else if(W==='sling'){p.line(39,44+ay,39,33+ay,r('#9a6a3a')[1]);p.line(39,33+ay,36,26+ay,r('#9a6a3a')[1]);p.line(39,33+ay,42,26+ay,r('#9a6a3a')[1]);p.line(36,26+ay,39,29+ay,'#5a4030');p.line(39,29+ay,42,26+ay,'#5a4030');p.ell(39,23+ay,2,2,wpn);}
   else if(W==='dagger'){p.rect(37,24+ay,2,11,wpn);p.set(37,23+ay,wpn[0]);p.line(35,35+ay,41,35+ay,guard[1]);}
   p.ell(hx0,hy0,2.3,2.3,S);if(tassel&&(W==='blade')){p.line(35,40+ay,33,46+ay,tassel[1]);p.line(36,40+ay,35,47+ay,tassel[2]);}
+  if(o._front)o._front(p,o,r,mood,hx0,hy0);
+  if(o._head){p.rect(22,18,5,4,S);o._head(p,o,mood,r,I);}else{
   /* neck, head with jaw and ears */
   p.rect(22,18,5,4,S);p.line(22,20,26,20,S[2]);
   if(o.hat==='hood'||o.hat==='mask'){const hd=r(o.hood);p.ell(24,11,10,10,hd);p.poly([[30,8],[38,14],[35,17],[30,12]],hd);}
@@ -94,6 +100,7 @@ function pxHero(o,mood){
     else{p.set(24,15,S[2]);p.set(25,16,S[2]);if(atk)p.rect(23,18,3,1,'#7a2a30');else p.line(23,18,25,18,'#a05a48');p.set(24,19,S[2]);}
     if(o.beard){const bd=r(o.beard);p.poly([[19,16],[29,16],[27,22],[24,24],[21,22]],bd);p.line(22,17,26,17,bd[2]);p.line(21,19,22,21,bd[0]);}
     if(o.paint){p.line(18,16,19,18,'#c0303c');p.line(29,16,30,18,'#c0303c');}}
+  }
   p.rim(.28);p.selout();
   if(o.glow&&(W==='blade'))for(let i=0;i<30;i+=2){const x=Math.round(37+i*.33),y=Math.round(34+ay-i*1.05);for(const [dx,dy] of [[-2,0],[2,1],[-1,-1]])if(!p.get(x+dx,y+dy))p.set(x+dx,y+dy,i%4?o.glow:'#ffffff');}
   if(o.glow&&W!=='blade')for(const [x,y] of [[36,0],[43,2],[44,8],[35,7]])if(!p.get(x,y+ay))p.set(x,y+ay,o.glow);
@@ -158,3 +165,10 @@ for(const id in HERO)PIXHERO[id]=(st,g,mood)=>pxHero(HERO[id][Math.max(0,Math.mi
 PIXHERO.hanbyeol=(st,stage,mood)=>pxHero(HERO_HB[Math.max(0,Math.min(5,stage||0))],mood);
 for(const id in HERO_ONE)PIXHERO[id]=(st,g,mood)=>pxHero(HERO_ONE[id],mood);
 Object.assign(PIXU,PIXHERO);
+
+/* the other folk keep their shapes from pixel.js but are painted the same clean way */
+/* sharper predators */
+for(const [id,extra] of [['wolf',{snout:1,ruff:1}],['fox',{snout:1,ruff:1}],['wolfking',{snout:1,ruff:1,fangs:1}],['panther',{snout:1}],['bear',{claws:1}]]){
+  const base=PIXU[id];PIXU[id]=(st,g,mood)=>{const keep=pxBeast;pxBeast=(s,m,o)=>keep(s,m,Object.assign({},o,extra));try{return base(st,g,mood);}finally{pxBeast=keep;}};}
+{const base=PIXU.baeksan;PIXU.baeksan=(st,g,mood)=>{const keep=pxBeast;pxBeast=(s,m,o)=>keep(s,m,Object.assign({},o,{snout:1,ruff:1,fangs:1}));try{return base(st,g,mood);}finally{pxBeast=keep;}};}
+Pix=function(W,H){const q=Pix2(W,H);q.outline=()=>{q.rim(.24);q.selout();};return q;};
