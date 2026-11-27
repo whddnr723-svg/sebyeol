@@ -25,7 +25,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>세별 수호대 · Star Guardians</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap">
-<script src="style.js?v=1128b" charset="utf-8"></script>
+<script src="style.js?v=1128d" charset="utf-8"></script>
 
 <div id="app">
   <div id="top">
@@ -77,19 +77,19 @@
   </div></div>
 </div>
 
-<script src="data.js?v=1128b" charset="utf-8"></script>
-<script src="field.js?v=1128b" charset="utf-8"></script>
-<script src="pixel.js?v=1128b" charset="utf-8"></script>
-<script src="hero.js?v=1128b" charset="utf-8"></script>
-<script src="people.js?v=1128b" charset="utf-8"></script>
-<script src="beasts.js?v=1128b" charset="utf-8"></script>
-<script src="spirits.js?v=1128b" charset="utf-8"></script>
-<script src="foes.js?v=1128b" charset="utf-8"></script>
-<script src="fx.js?v=1128b" charset="utf-8"></script>
-<script src="skills.js?v=1128b" charset="utf-8"></script>
-<script src="story.js?v=1128b" charset="utf-8"></script>
-<script src="en.js?v=1128b" charset="utf-8"></script>
-<script src="sfx.js?v=1128b" charset="utf-8"></script>
+<script src="data.js?v=1128d" charset="utf-8"></script>
+<script src="field.js?v=1128d" charset="utf-8"></script>
+<script src="pixel.js?v=1128d" charset="utf-8"></script>
+<script src="hero.js?v=1128d" charset="utf-8"></script>
+<script src="people.js?v=1128d" charset="utf-8"></script>
+<script src="beasts.js?v=1128d" charset="utf-8"></script>
+<script src="spirits.js?v=1128d" charset="utf-8"></script>
+<script src="foes.js?v=1128d" charset="utf-8"></script>
+<script src="fx.js?v=1128d" charset="utf-8"></script>
+<script src="skills.js?v=1128d" charset="utf-8"></script>
+<script src="story.js?v=1128d" charset="utf-8"></script>
+<script src="en.js?v=1128d" charset="utf-8"></script>
+<script src="sfx.js?v=1128d" charset="utf-8"></script>
 <script>
 (()=>{
 const $=id=>document.getElementById(id), rnd=n=>Math.floor(Math.random()*n);
@@ -173,7 +173,7 @@ function startBattle(){if(S.phase!=='prep'||S.pick)return false;if(!boardCount()
       cd:.3+Math.random()*.3,n:0,stun:0,slowU:0,slowA:0,flash:0,inv:0,heal:0});});
   const on=Object.keys(SYN).filter(T).map(k=>(RACE[k]||CLS[k]).n+(T(k)===2?'★':''));sfx('start');toast(L(S.round+'라운드 전투 개시!','Round '+S.round+': fight!'),on.length?L('조합 발동: ','Synergies: ')+on.join(' · '):'',1500);
   const w=nextWave();B={ents,q:w.q.slice(),ehp:w.hp,edmg:w.dmg,t:0,fx:[],zones:[],dead:[],revive:has('revive'),met:T('mag')?{every:[0,8,5][T('mag')],next:[0,5,3][T('mag')],dmg:metDmg}:null};S.phase='battle';ui();return true;}
-function spawn(k){const t=ET[k];B.ents.push({side:1,spr:k==='boss'?bossSpr(S.round):k,mot:MOT[k],born:B.t,ph:Math.random()*6,proj:'arrow',face:1,ai:t.ai,col:k==='boss'?'#7a2d4a':'#4a3050',ring:'#ff6b7a',k:k==='boss'?'boss':null,big:t.big,
+function spawn(k){const t=ET[k];B.ents.push({side:1,fly:k==='bat',spr:k==='boss'?bossSpr(S.round):k,mot:MOT[k],born:B.t,ph:Math.random()*6,proj:'arrow',face:1,ai:t.ai,col:k==='boss'?'#7a2d4a':'#4a3050',ring:'#ff6b7a',k:k==='boss'?'boss':null,big:t.big,
   x:COLS/2+(Math.random()-.5)*5,y:.1,hp:B.ehp*t.hp,max:B.ehp*t.hp,dmg:B.edmg*t.dmg,as:t.as,range:t.range,sp:t.sp,th:t.th,dr:0,slow:0,skill:1,cd:.4,n:0,stun:0,slowU:0,slowA:0,flash:0});}
 function hit(a,t,d){if(B.t<t.inv)return;if(t.vulnU>B.t)d*=1.15;if(a.crit&&Math.random()<a.crit){d*=2;B.fx.push({k:'spark',x:t.x,y:t.y,t:.25,big:1,c:'#ffe566'});}
   if(a.burn){t.burnU=B.t+3;t.burnD=Math.max(t.burnD||0,a.dmg*a.burn);}d*=1-t.dr;if(t.ai==='shield'&&a.range>1.5)d*=.5;if(t.sh>0){const x=Math.min(t.sh,d);t.sh-=x;d-=x;}
@@ -235,7 +235,7 @@ function step(dt){if(!B)return;B.t+=dt;
     if(bd>a.range&&!a.side&&a.range<1.5&&t.y<1.7&&a.y>2.2){a.moving=0;continue;}
     if(bd>a.range){const v=a.sp*sl*dt/bd;a.x+=(t.x-a.x)*v;a.y+=(t.y-a.y)*v;a.moving=1;a.face=t.x<a.x-.05?-1:1;}
     else{a.moving=0;a.cd-=dt*sl;if(a.cd<=0){a.cd+=1/(a.as*(B.t<a.frenzy?1.4:1));attack(a,t,foes,a.side?N:P);}}}
-  for(let i=0;i<E.length;i++)for(let j=i+1;j<E.length;j++){const a=E[i],b=E[j],d=dist(a,b),m=.86;
+  for(let i=0;i<E.length;i++)for(let j=i+1;j<E.length;j++){const a=E[i],b=E[j],d=dist(a,b),m=a.fly!==b.fly?0:.86;
     if(d<m&&d>.001){const p=(m-d)/2/d,dx=(a.x-b.x)*p,dy=(a.y-b.y)*p;a.x+=dx;a.y+=dy;b.x-=dx;b.y-=dy;}}
   for(const a of E){a.x=Math.max(.35,Math.min(COLS-.35,a.x));a.y=Math.max(.15,Math.min(ROWS-.35,a.y));}
   for(const a of E){if(a.heal>0)a.heal-=dt;if(a.hp<=0&&a.boom&&!a.dead){a.dead=1;for(const f of N)if(f.hp>0&&dist(a,f)<=1.6)hit({},f,a.max*a.boom);B.fx.push({k:'boom',x:a.x,y:a.y,r:1.6,t:.5,c:a.col});}}
