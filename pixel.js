@@ -82,7 +82,7 @@ const PIXCACHE={};
 function pixCanvas(id,st,stage,mood){const k=id+'|'+st+'|'+stage+'|'+mood;if(PIXCACHE[k])return PIXCACHE[k];
   const p=PIXU[id](st||1,stage||0,mood||0),v=document.createElement('canvas');v.width=p.W;v.height=p.H;p.paint(v.getContext('2d'),1,0,0);return PIXCACHE[k]=v;}
 /* draws a pixel character into drawSprite's -1..1 box, feet at .88 */
-function drawPixInBox(c,id,st,stage,mood){const v=pixCanvas(id,st,stage,mood),h=2.0,w=h*v.width/v.height,sm=c.imageSmoothingEnabled;
+function drawPixInBox(c,id,st,stage,mood){const v=pixCanvas(id,st,stage,mood),h=2.0*Math.max(1,v.height/64),w=h*v.width/v.height,sm=c.imageSmoothingEnabled;
   c.imageSmoothingEnabled=false;c.drawImage(v,-w/2+.03,.9-h,w,h);c.imageSmoothingEnabled=sm;}
 
 /* ---------- batch 2: the moon folk (beasts, a bird, goblin spirits) ---------- */

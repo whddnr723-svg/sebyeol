@@ -145,5 +145,17 @@ document.head.appendChild(Object.assign(document.createElement('style'),{textCon
 .stx p{margin:0;font-size:15px;line-height:1.65;color:var(--fg)}
 #scene.nar .stx p{font-style:italic;color:#d8d2f0}
 .stx small{align-self:flex-end;color:var(--muted);font-size:11px}
-#sceneSkip{position:absolute;top:max(12px,env(safe-area-inset-top,0px));right:12px;padding:6px 12px;font-size:12px}
+#sceneSkip{position:absolute;top:max(12px,env(safe-area-inset-top,0px));right:56px;padding:6px 12px;font-size:12px}
+body{word-break:keep-all;overflow-wrap:anywhere}
+#titleArt{display:block;width:calc(100% + 36px);margin:-18px -18px 10px;border-radius:14px 14px 0 0;image-rendering:pixelated;height:auto}
+.sheet h2.title{font-size:28px;margin:4px 0 6px;background:linear-gradient(#fff3c4,#ffc94d);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:1px}
+#muteBtn{width:32px;height:32px;border-radius:50%;padding:0;flex:none;display:grid;place-items:center}
+#muteBtn .off{display:none}#muteBtn.muted .off{display:inline}#muteBtn.muted .on{display:none}#muteBtn.muted{opacity:.6}
+#diff .sheet{position:relative}
+#diff .langBtn{position:absolute;top:10px;right:10px;margin:0!important;background:rgba(20,26,46,.75)!important;z-index:2}
+.sheet details{border:1px solid var(--line);border-radius:10px;margin:8px 0;padding:0 10px}
+.sheet summary{cursor:pointer;padding:9px 0;font-family:var(--display);color:var(--gold);list-style:none}
+.sheet summary::-webkit-details-marker{display:none}
+.sheet summary::after{content:'+';float:right;color:var(--muted)}
+.sheet details[open] summary::after{content:'-'}
 `}));

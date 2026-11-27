@@ -25,7 +25,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>세별 수호대 · Star Guardians</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap">
-<script src="style.js?v=1129c" charset="utf-8"></script>
+<script src="style.js?v=1130l" charset="utf-8"></script>
 
 <div id="app">
   <div id="top">
@@ -33,6 +33,7 @@
     <div id="hudTop">
       <div id="roundBox"><small id="regName">라운드</small><b id="vRound">1</b><span>/50</span></div>
       <div id="track"></div>
+      <button id="muteBtn" type="button" aria-label="소리"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="on" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path class="off" d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
       <button id="helpBtn" type="button" aria-label="규칙">?</button>
     </div>
     <div id="hudRow">
@@ -58,7 +59,7 @@
     <div id="sellZone" hidden></div>
   </div>
   <div id="scene" hidden><button id="sceneSkip" type="button">건너뛰기</button><div class="sbox"><canvas id="sceneFace" width="120" height="120"></canvas><div class="stx"><b id="sceneName"></b><p id="sceneText"></p><small>눌러서 계속</small></div></div></div>
-  <div class="modal" id="diff" hidden><div class="sheet"><h2>세별 수호대</h2><p>하늘에서 가장 찬란하던 금별을 세 별이 시기해 떨어뜨렸어요. 잊힌 금별은 그믐별이 되어 복수했고, 저승 문이 열렸어요. 금별의 환생인 줄 모르는 소년 한별이 세 별의 제자들과 함께 다섯 고을을 넘어요.</p><h2>난이도를 고르세요</h2>
+  <div class="modal" id="diff" hidden><div class="sheet"><canvas id="titleArt" width="384" height="168" aria-hidden="true"></canvas><h2 class="title">세별 수호대</h2><p>하늘에서 가장 찬란하던 금별을 세 별이 시기해 떨어뜨렸어요. 잊힌 금별은 그믐별이 되어 복수했고, 저승 문이 열렸어요. 금별의 환생인 줄 모르는 소년 한별이 세 별의 제자들과 함께 다섯 고을을 넘어요.</p><h2>난이도를 고르세요</h2>
     <button class="tcard" id="d_normal" type="button"><b>보통</b><span>처음 해 보는 분께 맞아요.</span></button>
     <button class="tcard" id="d_hard" type="button"><b>어려움</b><span>조합과 전술을 맞춰야 깰 수 있어요.</span></button>
     <button class="tcard" id="d_hell" type="button"><b>지옥</b><span>돈 관리, 자리, 적 대응까지 다 맞아야 해요.</span></button>
@@ -66,29 +67,8 @@
   <div class="modal" id="tac" hidden><div class="sheet"><h2>전술을 하나 고르세요</h2><p>고른 전술은 이번 판이 끝날 때까지 이어져요.</p><div id="tacList"></div></div></div>
   <div class="modal" id="help" hidden><div class="sheet">
     <h2>세별 수호대 규칙</h2>
-    <ul>
-      <li><b>사기</b>: 아래 상점에서 유닛을 눌러 사요. 산 유닛은 대기석(맨 아랫줄)에 들어와요.</li>
-      <li><b>놓기</b>: 유닛을 끌어서 밝은 칸에 놓아요. 레벨만큼만 놓을 수 있어요.</li>
-      <li><b>합치기</b>: 같은 유닛 3개를 모으면 별 2개로, 별 2개짜리 3개면 별 3개로 자동으로 합쳐져요. 별이 오르면 몸집이 커지고 은빛·금빛 후광이 생기며 스킬도 강해져요.</li>
-      <li><b>한별</b>: 주인공이에요. 처음부터 판에 있고 팔 수 없어요. 장군을 풀어 줄 때마다 강해지고 모습이 바뀌어요.</li>
-      <li><b>장군</b>: 10, 20, 30, 40, 45라운드에 금별의 장군이 흑화된 채 나와요. 이기면 어둠에서 풀려나 상점에 나와요. 지면 다음 라운드로 못 가고, 이길 때까지 다시 싸워요.</li>
-      <li><b>조합</b>: 종족(해별의 백성, 달별의 무리, 샛별의 물족)은 서로 다른 유닛 3종, 6종, 직업과 금별의 가신은 2종, 4종을 모으면 특수 능력이 생겨요. 위쪽 칩을 누르면 어떤 능력인지 나와요. 조합이 켜진 유닛은 금색 테두리가 생겨요.</li>
-      <li><b>전투</b>: 전투 시작을 누르면 알아서 싸워요. 45초 안에 적을 다 잡으면 이겨요.</li>
-      <li><b>돈</b>: 라운드마다 5골드에, 가진 돈 10골드마다 이자 1골드(최대 5), 연승·연패 보너스가 붙어요.</li>
-      <li><b>팔기</b>: 유닛을 상점 쪽으로 끌어다 놓거나, 유닛을 누른 뒤 판매를 눌러요.</li>
-      <li><b>자리</b>: 앞줄(방어선 쪽)은 받는 피해가 줄고, 뒷줄은 공격력이 올라요.</li>
-      <li><b>적의 버릇</b>: 준비 시간에 위쪽에 이번에 올 적이 보여요. 누르면 버릇이 나와요. 박쥐는 뒷줄을 덮치고, 방패병은 화살과 마법에 강해요. 적에 맞춰 자리와 조합을 바꾸세요.</li>
-      <li><b>아이템</b>: 아이템은 보스를 잡았을 때만 나와요(5라운드마다). 아이템을 누른 뒤 유닛을 누르면 장착돼요. 유닛 하나에 2개까지예요.</li>
-      <li><b>전술</b>: 3라운드부터 4라운드마다 전술 3개 중 1개를 골라요. 판이 끝날 때까지 이어져요.</li>
-      <li><b>전설 유닛</b>: 5골드짜리 전설 유닛 4종은 레벨 7부터 아주 드물게 상점에 나와요(레벨 9에서도 4%). 금빛 카드로 보여요. 전설 유닛은 판에 놓기만 해도 혼자서 켜지는 고유 조합이 있어요.</li>
-      <li><b>마법 계통</b>: 마법사의 기본 공격에 종족 마법이 붙어요. 인간의 도술은 세 번에 한 번 적을 묶고, 용족의 마법은 맞은 적 주변까지 터지고, 정령술은 불(화상)·번개(옆 적에게 튐)·바람(느려짐), 동물과 도깨비의 주술은 적의 공격력을 잠깐 25% 떨어뜨려요.</li>
-      <li><b>궁수 종족</b>: 궁수도 종족마다 달라요. 인간은 세 번에 한 번 급소를 맞혀 2배, 사냥매의 깃털은 출혈, 바람 정령의 바람 칼날은 적을 뒤로 밀고 느리게, 불도마뱀의 불침은 화상을 입혀요.</li>
-      <li><b>암살자 종족</b>: 암살자도 종족마다 달라요. 자객은 독을 묻혀 중독, 먹표범·달빛 늑대·백산은 체력이 절반 아래인 적에게 1.5배, 그림자 도깨비는 세 번에 한 번 연기에 숨어 잠깐 무적, 안개 이무기는 물린 적이 3초 동안 피해를 15% 더 받아요.</li>
-      <li>50라운드를 버티면 이겨요. 5라운드마다 보스가 나와요.</li>
-    </ul>
-    <h2>유닛과 스킬</h2>
-    <p>유닛마다 고유 스킬이 있어요. 체력 아래 파란 막대가 차면 스킬을 써요. 별이 오르면 스킬도 강해져요.</p>
-    <div id="dex"></div>
+    <ul><li><b>사기</b>: 아래 상점에서 유닛을 눌러 사요. 산 유닛은 대기석(맨 아랫줄)에 들어와요.</li><li><b>놓기</b>: 유닛을 끌어서 밝은 칸에 놓아요. 레벨만큼만 놓을 수 있어요.</li><li><b>합치기</b>: 같은 유닛 3개를 모으면 별 2개로, 별 2개짜리 3개면 별 3개로 자동으로 합쳐져요. 별이 오르면 몸집이 커지고 은빛·금빛 후광이 생기며 스킬도 강해져요.</li><li><b>전투</b>: 전투 시작을 누르면 알아서 싸워요. 45초 안에 적을 다 잡으면 이겨요.</li><li>50라운드를 버티면 이겨요. 5라운드마다 보스가 나와요.</li></ul><details><summary>조합과 자리</summary><ul><li><b>조합</b>: 종족(해별의 백성, 달별의 무리, 샛별의 물족)은 서로 다른 유닛 3종, 6종, 직업과 금별의 가신은 2종, 4종을 모으면 특수 능력이 생겨요. 위쪽 칩을 누르면 어떤 능력인지 나와요. 조합이 켜진 유닛은 금색 테두리가 생겨요.</li><li><b>자리</b>: 앞줄(방어선 쪽)은 받는 피해가 줄고, 뒷줄은 공격력이 올라요.</li><li><b>적의 버릇</b>: 준비 시간에 위쪽에 이번에 올 적이 보여요. 누르면 버릇이 나와요. 박쥐는 뒷줄을 덮치고, 방패병은 화살과 마법에 강해요. 적에 맞춰 자리와 조합을 바꾸세요.</li><li><b>돈</b>: 라운드마다 5골드에, 가진 돈 10골드마다 이자 1골드(최대 5), 연승·연패 보너스가 붙어요.</li><li><b>팔기</b>: 유닛을 상점 쪽으로 끌어다 놓거나, 유닛을 누른 뒤 판매를 눌러요.</li></ul></details><details><summary>한별과 장군</summary><ul><li><b>한별</b>: 주인공이에요. 처음부터 판에 있고 팔 수 없어요. 장군을 풀어 줄 때마다 강해지고 모습이 바뀌어요.</li><li><b>장군</b>: 10, 20, 30, 40, 45라운드에 금별의 장군이 흑화된 채 나와요. 이기면 어둠에서 풀려나 상점에 나와요. 지면 다음 라운드로 못 가고, 이길 때까지 다시 싸워요.</li><li><b>아이템</b>: 아이템은 보스를 잡았을 때만 나와요(5라운드마다). 아이템을 누른 뒤 유닛을 누르면 장착돼요. 유닛 하나에 2개까지예요.</li><li><b>전술</b>: 3라운드부터 4라운드마다 전술 3개 중 1개를 골라요. 판이 끝날 때까지 이어져요.</li><li><b>전설 유닛</b>: 5골드짜리 전설 유닛 4종은 레벨 7부터 아주 드물게 상점에 나와요(레벨 9에서도 4%). 금빛 카드로 보여요. 전설 유닛은 판에 놓기만 해도 혼자서 켜지는 고유 조합이 있어요.</li></ul></details><details><summary>종족마다 다른 싸움</summary><ul><li><b>마법 계통</b>: 마법사의 기본 공격에 종족 마법이 붙어요. 인간의 도술은 세 번에 한 번 적을 묶고, 용족의 마법은 맞은 적 주변까지 터지고, 정령술은 불(화상)·번개(옆 적에게 튐)·바람(느려짐), 동물과 도깨비의 주술은 적의 공격력을 잠깐 25% 떨어뜨려요.</li><li><b>궁수 종족</b>: 궁수도 종족마다 달라요. 인간은 세 번에 한 번 급소를 맞혀 2배, 사냥매의 깃털은 출혈, 바람 정령의 바람 칼날은 적을 뒤로 밀고 느리게, 불도마뱀의 불침은 화상을 입혀요.</li><li><b>암살자 종족</b>: 암살자도 종족마다 달라요. 자객은 독을 묻혀 중독, 먹표범·달빛 늑대·백산은 체력이 절반 아래인 적에게 1.5배, 그림자 도깨비는 세 번에 한 번 연기에 숨어 잠깐 무적, 안개 이무기는 물린 적이 3초 동안 피해를 15% 더 받아요.</li></ul></details>
+    <details><summary>유닛과 스킬</summary><p>유닛마다 고유 스킬이 있어요. 체력 아래 파란 막대가 차면 스킬을 써요. 별이 오르면 스킬도 강해져요.</p><div id="dex"></div></details>
     <button class="big" id="helpClose" type="button">닫기</button>
   </div></div>
   <div class="modal" id="over" hidden><div class="sheet">
@@ -97,15 +77,18 @@
   </div></div>
 </div>
 
-<script src="data.js?v=1129c" charset="utf-8"></script>
-<script src="sprites.js?v=1129c" charset="utf-8"></script>
-<script src="pixel.js?v=1129c" charset="utf-8"></script>
-<script src="hero.js?v=1129c" charset="utf-8"></script>
-<script src="kin.js?v=1129c" charset="utf-8"></script>
-<script src="fx.js?v=1129c" charset="utf-8"></script>
-<script src="skills.js?v=1129c" charset="utf-8"></script>
-<script src="story.js?v=1129c" charset="utf-8"></script>
-<script src="en.js?v=1129c" charset="utf-8"></script>
+<script src="data.js?v=1130l" charset="utf-8"></script>
+<script src="sprites.js?v=1130l" charset="utf-8"></script>
+<script src="pixel.js?v=1130l" charset="utf-8"></script>
+<script src="hero.js?v=1130l" charset="utf-8"></script>
+<script src="kin.js?v=1130l" charset="utf-8"></script>
+<script src="chars.js?v=1130l" charset="utf-8"></script>
+<script src="foes.js?v=1130l" charset="utf-8"></script>
+<script src="fx.js?v=1130l" charset="utf-8"></script>
+<script src="skills.js?v=1130l" charset="utf-8"></script>
+<script src="story.js?v=1130l" charset="utf-8"></script>
+<script src="en.js?v=1130l" charset="utf-8"></script>
+<script src="sfx.js?v=1130l" charset="utf-8"></script>
 <script>
 (()=>{
 const $=id=>document.getElementById(id), rnd=n=>Math.floor(Math.random()*n);
@@ -135,14 +118,14 @@ function merge(){let again=true,made=null;
   while(again){again=false;const g={};
     for(const x of all()){if(x.u.star>=3)continue;const k=x.u.id+x.u.star;(g[k]=g[k]||[]).push(x);
       if(g[k].length===3){const [a,b,c]=g[k];const its=[a,b,c].flatMap(q=>q.u.items||[]);a.u.items=its.slice(0,2);S.bag.push(...its.slice(2));arr(b.z)[b.i]=null;arr(c.z)[c.i]=null;a.u.star++;a.u.popAt=performance.now();made=a.u;again=true;break;}}}
-  if(made)toast('★'.repeat(made.star)+' '+U[made.id].n+L(' 완성!',' ready!'),skText(made.id,made.star),2000);}
+  if(made){sfx('merge');}if(made)toast('★'.repeat(made.star)+' '+U[made.id].n+L(' 완성!',' ready!'),skText(made.id,made.star),2000);}
 function buy(i){if(S.phase!=='prep')return false;const id=S.shop[i];if(!id)return false;const d=U[id];
   if(S.gold<d.cost){toast(L('골드가 모자라요','Not enough gold'));return false;}
   let slot=S.bench.indexOf(null);
   if(slot<0){if(countOf(id,1)<2){toast(L('대기석이 꽉 찼어요','Your bench is full'));return false;}
-    S.gold-=d.cost;S.shop[i]=null;const t=all().find(x=>x.u.id===id&&x.u.star===1);
-    const o=all().filter(x=>x.u.id===id&&x.u.star===1&&x.u!==t.u)[0];const its=[...(t.u.items||[]),...(o.u.items||[])];t.u.items=its.slice(0,2);S.bag.push(...its.slice(2));arr(o.z)[o.i]=null;t.u.star=2;t.u.popAt=performance.now();merge();if(t.u.star===2)toast('★★ '+d.n+L(' 완성!',' ready!'),skText(id,2),2000);ui();return true;}
-  S.gold-=d.cost;S.shop[i]=null;S.bench[slot]={uid:uid++,id,star:1,popAt:performance.now()};merge();ui();return true;}
+    S.gold-=d.cost;S.shop[i]=null;sfx('buy');const t=all().find(x=>x.u.id===id&&x.u.star===1);
+    const o=all().filter(x=>x.u.id===id&&x.u.star===1&&x.u!==t.u)[0];const its=[...(t.u.items||[]),...(o.u.items||[])];t.u.items=its.slice(0,2);S.bag.push(...its.slice(2));arr(o.z)[o.i]=null;t.u.star=2;t.u.popAt=performance.now();merge();if(t.u.star===2){sfx('merge');}if(t.u.star===2)toast('★★ '+d.n+L(' 완성!',' ready!'),skText(id,2),2000);ui();return true;}
+  S.gold-=d.cost;S.shop[i]=null;sfx('buy');S.bench[slot]={uid:uid++,id,star:1,popAt:performance.now()};merge();ui();return true;}
 function reroll(){if(S.phase!=='prep'||S.gold<rrCost())return false;S.gold-=rrCost();rollShop();ui();return true;}
 function buyXp(){if(S.phase!=='prep'||S.gold<4||S.level>=9)return false;S.gold-=4;addXp(4);ui();return true;}
 function addXp(n){if(S.level>=9)return;S.xp+=n;while(S.level<9&&S.xp>=XPN[S.level]){S.xp-=XPN[S.level];S.level++;}if(S.level>=9)S.xp=0;}
@@ -187,10 +170,10 @@ function startBattle(){if(S.phase!=='prep'||S.pick)return false;if(!boardCount()
     ents.push({side:0,regen:lg.phoenix?.03:0,reb:d.id==='phoenix',burn,crit,ai:d.k==='asn'?'weak':0,items:u.items,spr:sprOf(u),gens:S.gens.length,mot:MOT[d.id],skN:Math.max(2,skN),skName:SK[d.id][0],school:SCHOOL[d.id],schoolC:schoolC(d.id,SCHOOL[d.id]),proj:d.k==='mag'&&SCHOOL[d.id]?SCHOOLP[SCHOOL[d.id]]:d.id==='hawk'?'feather':d.id==='wind'?'crescent':d.id==='salam'?'firebolt':d.id==='sling'?'rock':d.k==='arc'&&d.id!=='salam'&&d.id!=='phoenix'?'arrow':'orb',ph:Math.random()*6,face:1,col:RACE[d.r].c,ring:TIERC[d.cost],star:u.star,k:d.k,x:i%COLS+.5,y:3+Math.floor(i/COLS)+.5,
       hp,max:hp,sh:hp*([0,.15,.35][T('human')]+(has('flag')?.2:0)+shx),dmg,as,range,sp:st.sp,dr,slow,skill,leech,boom,guard,bounce,aura:!!(T(d.r)||T(d.k)),
       cd:.3+Math.random()*.3,n:0,stun:0,slowU:0,slowA:0,flash:0,inv:0,heal:0});});
-  const on=Object.keys(SYN).filter(T).map(k=>(RACE[k]||CLS[k]).n+(T(k)===2?'★':''));toast(L(S.round+'라운드 전투 개시!','Round '+S.round+': fight!'),on.length?L('조합 발동: ','Synergies: ')+on.join(' · '):'',1500);
+  const on=Object.keys(SYN).filter(T).map(k=>(RACE[k]||CLS[k]).n+(T(k)===2?'★':''));sfx('start');toast(L(S.round+'라운드 전투 개시!','Round '+S.round+': fight!'),on.length?L('조합 발동: ','Synergies: ')+on.join(' · '):'',1500);
   const w=nextWave();B={ents,q:w.q.slice(),ehp:w.hp,edmg:w.dmg,t:0,fx:[],zones:[],dead:[],revive:has('revive'),met:T('mag')?{every:[0,8,5][T('mag')],next:[0,5,3][T('mag')],dmg:metDmg}:null};S.phase='battle';ui();return true;}
 function spawn(k){const t=ET[k];B.ents.push({side:1,spr:k==='boss'?bossSpr(S.round):k,mot:MOT[k],born:B.t,ph:Math.random()*6,proj:'arrow',face:1,ai:t.ai,col:k==='boss'?'#7a2d4a':'#4a3050',ring:'#ff6b7a',k:k==='boss'?'boss':null,big:t.big,
-  x:COLS/2+(Math.random()-.5)*3.2,y:.1,hp:B.ehp*t.hp,max:B.ehp*t.hp,dmg:B.edmg*t.dmg,as:t.as,range:t.range,sp:t.sp,th:t.th,dr:0,slow:0,skill:1,cd:.4,n:0,stun:0,slowU:0,slowA:0,flash:0});}
+  x:COLS/2+(Math.random()-.5)*5,y:.1,hp:B.ehp*t.hp,max:B.ehp*t.hp,dmg:B.edmg*t.dmg,as:t.as,range:t.range,sp:t.sp,th:t.th,dr:0,slow:0,skill:1,cd:.4,n:0,stun:0,slowU:0,slowA:0,flash:0});}
 function hit(a,t,d){if(B.t<t.inv)return;if(t.vulnU>B.t)d*=1.15;if(a.crit&&Math.random()<a.crit){d*=2;B.fx.push({k:'spark',x:t.x,y:t.y,t:.25,big:1,c:'#ffe566'});}
   if(a.burn){t.burnU=B.t+3;t.burnD=Math.max(t.burnD||0,a.dmg*a.burn);}d*=1-t.dr;if(t.ai==='shield'&&a.range>1.5)d*=.5;if(t.sh>0){const x=Math.min(t.sh,d);t.sh-=x;d-=x;}
   t.hp-=d;t.flash=.12;if(a.slow){t.slowU=B.t+1.5;t.slowA=a.slow;}
@@ -227,8 +210,8 @@ function attack(a,t,foes,allies){a.n++;const d=a.dmg*(a.amp||1)*(a.weakU>B.t?.75
     if(far&&a.side===0&&a.k==='mag'&&a.school)schoolHit(a,t,foes,d);
     if(far&&a.side===0&&a.k==='arc'&&a.school)archerHit(a,t,d);
     if(!far&&a.side===0&&a.k==='asn')assassinHit(a,t,d);
-    if(far){const mg=a.side===0&&a.k==='mag'&&a.school,mc=mg?a.schoolC:pc;fx({p:a.proj||'orb',x1:a.x,y1:a.y,x2:t.x,y2:t.y,t:mg?.22:.16,c:mc});fx(mg?{k:SCHOOLH[a.school],x:t.x,y:t.y,r:.45,t:.4,d:.2,c:mc}:{k:'spark',x:t.x,y:t.y,t:.2,d:.14,c:pc});}
-    else{if(a.mvHit==='shuriken')fx({p:'shuriken',x1:a.x,y1:a.y,x2:t.x,y2:t.y,t:.14});fx({k:a.mvHit==='shuriken'?'spark':a.mvHit?a.mvHit:a.mot==='maul'?(a.n%2?'bite':'claw'):a.mot==='punch'?'ring':a.mot==='pounce'?'claw':a.mot==='swoop'?'claw':'slash',r:.35,x:t.x,y:t.y,a:ang,t:.22,d:.1,c:ec,big:a.mot==='slash'?1:0});fx({k:'spark',x:t.x,y:t.y,t:.2,d:.14,c:ec});}
+    if(far){const mg=a.side===0&&a.k==='mag'&&a.school,mc=mg?a.schoolC:pc;sfx(mg?(a.school==='hex'?'hex':'magic'):'shot');fx({p:a.proj||'orb',x1:a.x,y1:a.y,x2:t.x,y2:t.y,t:mg?.22:.16,c:mc});fx(mg?{k:SCHOOLH[a.school],x:t.x,y:t.y,r:.45,t:.4,d:.2,c:mc}:{k:'spark',x:t.x,y:t.y,t:.2,d:.14,c:pc});}
+    else{sfx(a.mvHit==='bite'?'bite':(a.mvHit==='slash'||a.mot==='slash')?'slash':'hit');if(a.mvHit==='shuriken')fx({p:'shuriken',x1:a.x,y1:a.y,x2:t.x,y2:t.y,t:.14});fx({k:a.mvHit==='shuriken'?'spark':a.mvHit?a.mvHit:a.mot==='maul'?(a.n%2?'bite':'claw'):a.mot==='punch'?'ring':a.mot==='pounce'?'claw':a.mot==='swoop'?'claw':'slash',r:.35,x:t.x,y:t.y,a:ang,t:.22,d:.1,c:ec,big:a.mot==='slash'?1:0});fx({k:'spark',x:t.x,y:t.y,t:.2,d:.14,c:ec});}
     if((a.k==='boss'||a.ai==='smash')&&a.n%3===0){for(const f of near(t,1.3))hit(a,f,d);fx({k:'shock',x:t.x,y:t.y,r:1.3,t:.45,d:.1,c:'#ff6b7a'});B.shake=.2;}else hit(a,t,d);
     if(a.bounce){let from=t;const used=[t];for(let i=0;i<a.bounce;i++){const o=foes.filter(f=>f.hp>0&&!used.includes(f)&&dist(from,f)<=2.2).sort((p,q)=>dist(from,p)-dist(from,q))[0];
       if(!o)break;hit(a,o,a.dmg*.5);fx({p:'arrow',x1:from.x,y1:from.y,x2:o.x,y2:o.y,t:.12,d:.16+i*.12,c:'#ffe9a8'});used.push(o);from=o;}}
@@ -247,11 +230,13 @@ function step(dt){if(!B)return;B.t+=dt;
     if(t&&a.taunt&&B.t<a.tauntU&&a.taunt.hp>0){t=a.taunt;bd=dist(a,t);}
     const sl=B.t<a.slowU?1-a.slowA:1;
     if(!t){if(a.side&&a.y<1)a.y+=a.sp*dt;continue;}
+    /* our melee holds its line until the enemy is inside the field, so fights happen where they can be seen */
+    if(bd>a.range&&!a.side&&a.range<1.5&&t.y<1.7&&a.y>2.2){a.moving=0;continue;}
     if(bd>a.range){const v=a.sp*sl*dt/bd;a.x+=(t.x-a.x)*v;a.y+=(t.y-a.y)*v;a.moving=1;a.face=t.x<a.x-.05?-1:1;}
     else{a.moving=0;a.cd-=dt*sl;if(a.cd<=0){a.cd+=1/(a.as*(B.t<a.frenzy?1.4:1));attack(a,t,foes,a.side?N:P);}}}
-  for(let i=0;i<E.length;i++)for(let j=i+1;j<E.length;j++){const a=E[i],b=E[j],d=dist(a,b),m=.62;
+  for(let i=0;i<E.length;i++)for(let j=i+1;j<E.length;j++){const a=E[i],b=E[j],d=dist(a,b),m=.86;
     if(d<m&&d>.001){const p=(m-d)/2/d,dx=(a.x-b.x)*p,dy=(a.y-b.y)*p;a.x+=dx;a.y+=dy;b.x-=dx;b.y-=dy;}}
-  for(const a of E){a.x=Math.max(.35,Math.min(COLS-.35,a.x));a.y=Math.max(-.4,Math.min(ROWS-.35,a.y));}
+  for(const a of E){a.x=Math.max(.35,Math.min(COLS-.35,a.x));a.y=Math.max(.15,Math.min(ROWS-.35,a.y));}
   for(const a of E){if(a.heal>0)a.heal-=dt;if(a.hp<=0&&a.boom&&!a.dead){a.dead=1;for(const f of N)if(f.hp>0&&dist(a,f)<=1.6)hit({},f,a.max*a.boom);B.fx.push({k:'boom',x:a.x,y:a.y,r:1.6,t:.5,c:a.col});}}
   if(B.met&&B.t>=B.met.next){B.met.next+=B.met.every;let best=null,bn=0;for(const f of N){if(f.hp<=0)continue;const n=N.filter(g=>g.hp>0&&dist(f,g)<=1.6).length;if(n>bn){bn=n;best=f;}}
     if(best){for(const g of N)if(g.hp>0&&dist(best,g)<=1.6)hit({},g,B.met.dmg);B.fx.push({k:'meteor',x:best.x,y:best.y,t:.32,c:'#ffb347'});B.fx.push({k:'boom',x:best.x,y:best.y,r:1.6,t:.55,d:.3,c:'#ff7a2f'});B.shake=.45;}}
@@ -276,7 +261,7 @@ function endBattle(win){let dmgTaken=0;
   let freed='';const gid=GEN_AT[lastRound];if(win&&gid&&!S.gens.includes(gid)){S.gens.push(gid);freed=gid;}
   const gate=!win&&(GEN_AT[lastRound]||lastRound>=MAXR);
   S.gold+=inc;addXp(2+(has('xp')?2:0));if(!gate){S.round++;if(S.round>=3&&(S.round-3)%4===0)offerTac();}S.phase='prep';S.prepT=PREP;if(!S.locked)rollShop();S.locked=false;
-  toast((win?L('승리!','Victory!'):L('패배  체력 -','Defeat  HP -')+dmgTaken)+got,L('수입 +','Income +')+inc+' ('+L('기본 ','base ')+base+(int?L(' · 이자 ',' · interest ')+int:'')+(sb?L(' · 연속 ',' · streak ')+sb:'')+(win?L(' · 승리 1',' · win 1'):'')+')',1800);
+  sfx(win?'win':'lose');toast((win?L('승리!','Victory!'):L('패배  체력 -','Defeat  HP -')+dmgTaken)+got,L('수입 +','Income +')+inc+' ('+L('기본 ','base ')+base+(int?L(' · 이자 ',' · interest ')+int:'')+(sb?L(' · 연속 ',' · streak ')+sb:'')+(win?L(' · 승리 1',' · win 1'):'')+')',1800);
   if(!gate&&S.round===41)playScene('enter4');else if(!gate&&S.round>1&&(S.round-1)%10===0)toast(L(MAPN[reg(S.round)]+'에 들어섰어요','Entering '+MAPN[reg(S.round)]),MAPT[reg(S.round)],3200);
   if(gate)toast(L((GEN_AT[lastRound]?U[GEN_AT[lastRound]].n:'흑화된 금별')+'에게 막혔어요  체력 -','Blocked by '+(GEN_AT[lastRound]?U[GEN_AT[lastRound]].n:'Darkened Goldstar')+'  HP -')+dmgTaken,L('이기기 전에는 앞으로 갈 수 없어요. 상점에서 전력을 키워 다시 도전하세요.','You can\'t move on until you win. Build up in the shop and try again.'),3500);
   if(freed)playScene('post_'+freed,()=>toast(U[freed].n+L(', 어둠에서 풀려나다',' is freed from the dark'),L('이제 상점에 나와요. 한별도 한 단계 자랐어요.','Now in the shop. Hanbyeol grew stronger too.'),3000));ui();}
@@ -340,15 +325,15 @@ function field(){const key=[cs,dpr,FW,FH,OX,OY,reg(S.round)].join('|');if(fieldC
   const v=document.createElement('canvas');v.width=Math.max(1,FW*dpr);v.height=Math.max(1,FH*dpr);const c=v.getContext('2d');c.scale(dpr,dpr);
   paintField(c,FW,FH,cs,OX,OY,reg(S.round));return fieldC=v;}
 /* characters are drawn bigger than their cell (feet stay put) so they read on a phone */
-const SPRK=1.4,SPRW=1.3;
+const SPRK=1.4,SPRW=1.3,SPRH=1.3;
 const sprC={};let sprSize=0;
 function sprite(id,st,md,part){md=md||0;part=part||0;const px=Math.max(16,Math.ceil(cs*1.4*SPRK*dpr));if(px!==sprSize){for(const k in sprC)delete sprC[k];sprSize=px;}
-  const k=id+st+'|'+md+part;if(sprC[k])return sprC[k];const v=document.createElement('canvas');v.width=Math.ceil(px*SPRW);v.height=px;const c=v.getContext('2d');
-  c.translate(v.width/2,px/2);c.scale(px/2*.9,px/2*.9);const dk=id.endsWith(':dark');drawSprite(c,dk?id.slice(0,-5):id,st,md,part);
+  const k=id+st+'|'+md+part;if(sprC[k])return sprC[k];const v=document.createElement('canvas');v.width=Math.ceil(px*SPRW);v.height=Math.ceil(px*SPRH);const c=v.getContext('2d');
+  c.translate(v.width/2,v.height-px/2);c.scale(px/2*.9,px/2*.9);const dk=id.endsWith(':dark');drawSprite(c,dk?id.slice(0,-5):id,st,md,part);
   if(dk){c.setTransform(1,0,0,1,0,0);c.globalCompositeOperation='source-atop';c.fillStyle='rgba(40,0,50,.5)';c.fillRect(0,0,px,px);c.globalCompositeOperation='source-over';}return sprC[k]=v;}
 const itemC={};function itemCv(id){if(itemC[id])return itemC[id];const v=document.createElement('canvas');v.width=v.height=64;const c=v.getContext('2d');c.translate(32,32);c.scale(30,30);drawItem(c,id);try{v.url=v.toDataURL();}catch(e){v.url='';}return itemC[id]=v;}
 const iconC={};
-function icon(id){if(iconC[id])return iconC[id];try{const v=document.createElement('canvas');v.width=v.height=96;const c=v.getContext('2d');c.translate(48,48);c.scale(43,43);drawSprite(c,id,1,0,0);drawSprite(c,id,1,0,1);return iconC[id]=v.toDataURL();}catch(e){return '';}}
+function icon(id){if(iconC[id])return iconC[id];try{const v=document.createElement('canvas');v.width=v.height=96;const c=v.getContext('2d');c.translate(48,54);c.scale(38,38);drawSprite(c,id,1,0,0);drawSprite(c,id,1,0,1);return iconC[id]=v.toDataURL();}catch(e){return '';}}
 /* each folk's magic: humans tao (talismans), dragon-kin arcane (rune circles), spirits elemental, beasts and goblins hex (curse fire) */
 const SCHOOL={sword:'tao',sling:'tao',mage:'tao',archer:'tao',ninja:'tao',paladin:'tao',hanbyeol:'tao',mugyeol:'tao',
   whelp:'arcane',salam:'arcane',stardrake:'arcane',wyvern:'arcane',elder:'arcane',mireu:'arcane',
@@ -375,8 +360,8 @@ function drawUnit(x,y,o){const st=o.star||1,ga=cx.globalAlpha,R=cs*(o.big?.62:[.
     if(o.pop>0){sx*=1+o.pop;sy*=1+o.pop;}
     if(o.die!=null)rot+=(1-o.die/.45)*1.3*(o.face||1);
     cx.save();cx.globalAlpha=ga*fa;cx.translate(x+ox,y+oy+R*.8);cx.rotate(rot);cx.scale(sx*(o.face||1),sy);const bs=o.spr.split(':')[0].replace(/^hanbyeol\d$/,'hanbyeol'),blink=((performance.now()/1000+(o.ph||0)*2.7)%3.4)<.13;
-    const md=o.die!=null||o.flash>0?1:o.atkT>0?(STRIKE[bs]?moveFrame(bs,o.n,1-o.atkT/.3):2):o.castT>0?(STRIKE[bs]?moveFrame(bs,o.n,1-o.castT/.45):2):o.moving?[3,0,4,0][Math.floor(performance.now()/120+(o.ph||0))%4]:blink?1:(STRIKE[bs]&&Math.floor(performance.now()/520+(o.ph||0))%2?7:0);cx.drawImage(sprite(o.spr,st,md,0),-R*1.12*SPRK*SPRW,R*.107-R*2.03*SPRK,R*2.24*SPRK*SPRW,R*2.24*SPRK);
-    if(HAS_ARM[o.spr.split(':')[0]]){cx.translate(R*.3,-R*.44);cx.rotate(armAngle(o));cx.translate(-R*.3,R*.44);cx.drawImage(sprite(o.spr,st,md,1),-R*1.12*SPRK*SPRW,R*.107-R*2.03*SPRK,R*2.24*SPRK*SPRW,R*2.24*SPRK);}cx.restore();}
+    const md=o.die!=null||o.flash>0?1:o.atkT>0?(STRIKE[bs]?moveFrame(bs,o.n,1-o.atkT/.3):2):o.castT>0?(STRIKE[bs]?moveFrame(bs,o.n,1-o.castT/.45):2):o.moving?[3,0,4,0][Math.floor(performance.now()/120+(o.ph||0))%4]:blink?1:(STRIKE[bs]&&Math.floor(performance.now()/520+(o.ph||0))%2?7:0);cx.drawImage(sprite(o.spr,st,md,0),-R*1.12*SPRK*SPRW,R*.107-R*2.03*SPRK-R*2.24*SPRK*(SPRH-1),R*2.24*SPRK*SPRW,R*2.24*SPRK*SPRH);
+    if(HAS_ARM[o.spr.split(':')[0]]){cx.translate(R*.3,-R*.44);cx.rotate(armAngle(o));cx.translate(-R*.3,R*.44);cx.drawImage(sprite(o.spr,st,md,1),-R*1.12*SPRK*SPRW,R*.107-R*2.03*SPRK-R*2.24*SPRK*(SPRH-1),R*2.24*SPRK*SPRW,R*2.24*SPRK*SPRH);}cx.restore();}
   if(B&&o.max&&o.die==null)drawStatus(cx,cs,x,y,R,o,B.t);
   if(o.flash>0){cx.globalAlpha=ga*.55;cx.beginPath();cx.arc(x,y,R*.8,0,7);cx.fillStyle='#fff';cx.fill();cx.globalAlpha=ga;}
   const ringAt=(r,c,w)=>{cx.beginPath();cx.arc(x,y,r,0,7);cx.strokeStyle=c;cx.lineWidth=w;cx.stroke();};
@@ -456,20 +441,33 @@ $('goBtn').onclick=()=>{if(S.phase==='prep'){const pre=GEN_AT[S.round]?'pre_'+GE
 $('sellBtn').onclick=()=>sell(S.sel);
 $('unBtn').onclick=()=>{const u=getU(S.sel);if(u&&u.items){S.bag.push(...u.items);u.items=[];ui();}};
 $('scene').onclick=()=>nextLine();$('sceneSkip').onclick=e=>{e.stopPropagation();nextLine(true);};
-$('helpBtn').onclick=()=>$('help').hidden=false;$('helpClose').onclick=()=>$('help').hidden=true;
+$('helpBtn').onclick=()=>$('help').hidden=false;
+const syncMute=()=>{$('muteBtn').classList.toggle('muted',SFX.muted);};syncMute();$('muteBtn').onclick=()=>{SFX.setMuted(!SFX.muted);syncMute();sfx('click');};
+if(document.addEventListener)document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('button');if(b&&b.id!=='muteBtn')sfx('click');});$('helpClose').onclick=()=>$('help').hidden=true;
 $('againBtn').onclick=()=>{$('over').hidden=true;$('diff').hidden=false;};
 for(const k of Object.keys(DIFF))$('d_'+k).onclick=()=>{newGame(k);track('game_start',{difficulty:k});playScene('prologue');};
 
 let last=0;function frame(t){const dt=Math.min(.05,(t-last)/1000||0);last=t;
   if(S.phase==='battle')for(let i=0;i<S.speed&&B;i++)step(dt);
-  else if(S.phase==='prep'&&S.prepT!=null&&!S.pick&&!SCN&&$('help').hidden&&$('diff').hidden&&$('over').hidden&&!drag){S.prepT-=dt;if(S.prepT<=0){S.prepT=0;$('goBtn').onclick();if(S.phase==='prep'&&!SCN)S.prepT=5;}}
+  else if(S.phase==='prep'&&S.prepT!=null&&!S.pick&&!SCN&&$('help').hidden&&$('diff').hidden&&$('over').hidden&&!drag){const pv=Math.ceil(S.prepT);S.prepT-=dt;if(S.prepT>0&&Math.ceil(S.prepT)<pv&&pv<=6)sfx('tick');if(S.prepT<=0){S.prepT=0;$('goBtn').onclick();if(S.phase==='prep'&&!SCN)S.prepT=5;}}
   draw();requestAnimationFrame(frame);}
-function start(data){newGame();
+function start(data){newGame();drawTitle();
   $('dex').innerHTML=UNITS.map(u=>'<div class="dx"><img alt="" src="'+icon(u.id)+'"><div><b>'+u.n+'</b> <small>'+RACE[u.r].n+'·'+CLS[u.k].n+' · '+u.cost+L('골드',' gold')+'</small><br>'+skText(u.id,1)+'</div></div>').join('');
   if(data&&data.s){try{Object.assign(S,data.s);S.phase='prep';S.sel=null;S.prepT=PREP;ui();}catch(e){newGame();}}
   $('diff').hidden=!!(data&&data.s);resize();requestAnimationFrame(frame);}
 const hot=window.claude&&window.claude.hot;
 try{hot&&hot.snapshot&&hot.snapshot(()=>({s:S.phase==='over'?null:{round:S.round,gold:S.gold,hp:S.hp,level:S.level,xp:S.xp,streak:S.streak,board:S.board,bench:S.bench,shop:S.shop,locked:S.locked,tac:S.tac,pick:S.pick,diff:S.diff,bag:S.bag}}));}catch(e){}
+/* start-screen picture: night sky with the three stars and the empty fourth place, Hanbyeol and a disciple of each star */
+function drawTitle(){const v=$('titleArt');if(!v||!v.getContext)return;const c=v.getContext('2d'),W=v.width,H=v.height;c.imageSmoothingEnabled=false;
+  const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'#0b1030');g.addColorStop(.7,'#26285a');g.addColorStop(1,'#3a2f5a');c.fillStyle=g;c.fillRect(0,0,W,H);
+  let sd=7;const rnd=()=>{sd=(sd*9301+49297)%233280;return sd/233280;};c.fillStyle='#fff';for(let i=0;i<70;i++){c.globalAlpha=.3+rnd()*.7;c.fillRect(Math.floor(rnd()*W),Math.floor(rnd()*H*.7),1,1);}c.globalAlpha=1;
+  const star=(x,y,r,col,dim)=>{c.save();c.translate(x,y);if(!dim){const gl=c.createRadialGradient(0,0,0,0,0,r*3);gl.addColorStop(0,col);gl.addColorStop(1,'rgba(0,0,0,0)');c.globalAlpha=.55;c.fillStyle=gl;c.beginPath();c.arc(0,0,r*3,0,7);c.fill();c.globalAlpha=1;}
+    c.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*.42:r;c.lineTo(Math.cos(a)*rr,Math.sin(a)*rr);}c.closePath();
+    if(dim){c.setLineDash([3,3]);c.strokeStyle='rgba(255,233,168,.55)';c.lineWidth=1.5;c.stroke();}else{c.fillStyle=col;c.fill();}c.restore();};
+  star(66,40,11,'#ffb347');star(128,24,10,'#9fb4ff');star(192,24,10,'#6fd3e6');star(256,38,12,'#ffe9a8',1);
+  c.fillStyle='#1c1838';c.beginPath();c.moveTo(0,H);c.lineTo(0,140);for(let x=0;x<=W;x+=24)c.lineTo(x,136+Math.sin(x*.05)*6);c.lineTo(W,H);c.fill();
+  const put=(id,st,x,s,stage)=>{try{const q=pixCanvas(id,st,stage||0,0);const h=q.height*s,w=q.width*s;c.drawImage(q,x-w/2,H-6-h,w,h);}catch(e){}};
+  put('sword',2,72,1.4);put('fox',2,136,1.4);put('whelp',2,298,1.4);put('hanbyeol',1,214,1.95,2);}
 window.__game={playScene,nextLine,pickTac,drawSprite,get S(){return S},get B(){return B},U,UNITS,buy,reroll,buyXp,startBattle,step,move,sell,synergy,newGame,boardCount};
 if(hot&&hot.ready)hot.ready(start);else start((hot&&hot.data)||{});
 })();
