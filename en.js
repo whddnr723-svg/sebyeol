@@ -85,7 +85,7 @@ const I18N={
 "폭탄병":"Bomber","쓰러질 때 터져요. 멀리서 잡거나 흩어져 서세요.":"Explodes when it falls. Kill it from range or spread out.",
 "보스":"Boss","체력이 아주 많고 세 번째 공격마다 주변을 휩쓸어요.":"Huge HP, and every 3rd hit sweeps the area.",
 /* tactics */
-"부자의 금고":"Rich Vault","이자를 최대 8골드까지 받아요. (원래 5)":"Interest caps at 8 gold instead of 5.",
+"부자의 금고":"Rich Vault","이자를 최대 5골드까지 받아요. (원래 3)":"Interest caps at 5 gold instead of 3.",
 "보급로":"Supply Line","라운드마다 기본 수입이 2골드 늘어요.":"+2 base gold every round.",
 "단골 상점":"Regular Customer","새로 뽑기가 1골드로 싸져요.":"Rerolls cost only 1 gold.",
 "교관":"Drill Master","라운드마다 경험치를 2 더 받아요. 레벨이 빨리 올라요.":"+2 XP every round. Level up faster.",
@@ -197,13 +197,13 @@ const I18N={
 "놓기":"Place",": 유닛을 끌어서 밝은 칸에 놓아요. 레벨만큼만 놓을 수 있어요.":": Drag units onto the bright tiles. You can field as many as your level.",
 "합치기":"Merge",": 같은 유닛 3개를 모으면 별 2개로, 별 2개짜리 3개면 별 3개로 자동으로 합쳐져요. 별이 오르면 몸집이 커지고 은빛·금빛 후광이 생기며 스킬도 강해져요.":
   ": Three of the same unit merge into a 2-star; three 2-stars make a 3-star. Stars bring a bigger body, a silver or gold halo and a stronger skill.",
-": 주인공이에요. 처음부터 판에 있고 팔 수 없어요. 장군을 풀어 줄 때마다 강해지고 모습이 바뀌어요.":": The hero. He starts on the board and can't be sold. He grows stronger and changes with every general you free.",
+": 주인공이에요. 처음부터 판에 있고 팔 수 없어요. 장군을 풀어 줄 때마다 강해지고 모습이 바뀌어요. 장군 2명이면 별 2개, 4명이면 별 3개가 돼요.":": The hero. He starts on the board and can't be sold. He grows stronger and changes with every general you free: 2 generals make him 2-star, 4 make him 3-star.",
 "장군":"Generals",": 10, 20, 30, 40, 45라운드에 금별의 장군이 흑화된 채 나와요. 이기면 어둠에서 풀려나 상점에 나와요. 지면 다음 라운드로 못 가고, 이길 때까지 다시 싸워요.":
   ": At rounds 10, 20, 30, 40 and 45, one of Goldstar's generals appears, corrupted. Win and they are freed and join the shop. Lose and you fight them again until you win.",
 "조합":"Synergies",": 종족(해별의 백성, 달별의 무리, 샛별의 물족)은 서로 다른 유닛 3종, 6종, 직업과 금별의 가신은 2종, 4종을 모으면 특수 능력이 생겨요. 위쪽 칩을 누르면 어떤 능력인지 나와요. 조합이 켜진 유닛은 금색 테두리가 생겨요.":
   ": Field 3 or 6 different units of a race (Sunstar, Moonstar, Dawnstar), or 2 or 4 of a class or of Goldstar's Retainers, to unlock bonuses. Tap the chips at the top to see them. Units with an active synergy get a gold outline.",
 "전투":"Battle",": 전투 시작을 누르면 알아서 싸워요. 45초 안에 적을 다 잡으면 이겨요.":": Press Fight! and they battle on their own. Defeat every enemy within 45 seconds to win.",
-"돈":"Gold",": 라운드마다 5골드에, 가진 돈 10골드마다 이자 1골드(최대 5), 연승·연패 보너스가 붙어요.":": 5 gold each round, plus 1 interest per 10 gold you hold (max 5), plus win and loss streak bonuses.",
+"돈":"Gold",": 라운드마다 2골드에, 가진 돈 10골드마다 이자 1골드(최대 3), 연승·연패 보너스가 붙어요.":": 2 gold each round, plus 1 interest per 10 gold you hold (max 3), plus win and loss streak bonuses.",
 "팔기":"Sell",": 유닛을 상점 쪽으로 끌어다 놓거나, 유닛을 누른 뒤 판매를 눌러요.":": Drag a unit onto the shop, or tap it and press Sell.",
 "자리":"Rows",": 앞줄(방어선 쪽)은 받는 피해가 줄고, 뒷줄은 공격력이 올라요.":": The front row (by the barricade) takes less damage; the back row deals more.",
 "적의 버릇":"Enemy habits",": 준비 시간에 위쪽에 이번에 올 적이 보여요. 누르면 버릇이 나와요. 박쥐는 뒷줄을 덮치고, 방패병은 화살과 마법에 강해요. 적에 맞춰 자리와 조합을 바꾸세요.":
