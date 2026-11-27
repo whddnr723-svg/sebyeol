@@ -183,14 +183,14 @@ const I18N={
 "이제 넷이서 막아야 한다.":"Now the four of us must hold it back.",
 "저승 문 깊은 곳에서, 무언가 움직였다.  — 시즌 1 끝 —":"Deep beyond the underworld gate, something stirred.  — End of Season 1 —",
 /* page text */
-"세별 수호대":"Star Guardians","세별 수호대 · Star Guardians":"Star Guardians","라운드":"Round","규칙":"Rules","소리":"Sound","배치 1/3":"Units 1/3","아이템 빼기":"Remove items","판매":"Sell",
+"한별전":"Dokkaebi Defense","도깨비 디펜스":"The Tale of Hanbyeol","한별전: 도깨비 디펜스 · Dokkaebi Defense":"Dokkaebi Defense: The Tale of Hanbyeol","라운드":"Round","규칙":"Rules","소리":"Sound","배치 1/3":"Units 1/3","아이템 빼기":"Remove items","판매":"Sell",
 "새로 뽑기":"Reroll","레벨업":"Level up","잠금":"Lock","전투 시작":"Fight!","건너뛰기":"Skip","눌러서 계속":"Tap to continue",
 "하늘에서 가장 찬란하던 금별을 세 별이 시기해 떨어뜨렸어요. 잊힌 금별은 그믐별이 되어 복수했고, 저승 문이 열렸어요. 금별의 환생인 줄 모르는 소년 한별이 세 별의 제자들과 함께 다섯 고을을 넘어요.":
   "Goldstar was the brightest star in the sky, until three jealous stars cast her down. Forgotten, she turned into a dark star and took her revenge, and the underworld gate opened. Hanbyeol, a boy who doesn't know he is Goldstar reborn, sets out with the disciples of the three stars to cross five villages.",
 "난이도를 고르세요":"Choose a difficulty","처음 해 보는 분께 맞아요.":"Good for your first run.","조합과 전술을 맞춰야 깰 수 있어요.":"You'll need the right synergies and tactics.",
 "돈 관리, 자리, 적 대응까지 다 맞아야 해요.":"Gold, positioning and counters all have to be right.",
 "전술을 하나 고르세요":"Choose a tactic","고른 전술은 이번 판이 끝날 때까지 이어져요.":"Your tactic lasts until the end of this run.",
-"세별 수호대 규칙":"How to play","유닛과 스킬":"Units and skills","유닛마다 고유 스킬이 있어요. 체력 아래 파란 막대가 차면 스킬을 써요. 별이 오르면 스킬도 강해져요.":
+"한별전 규칙":"How to play","유닛과 스킬":"Units and skills","유닛마다 고유 스킬이 있어요. 체력 아래 파란 막대가 차면 스킬을 써요. 별이 오르면 스킬도 강해져요.":
   "Every unit has its own skill. It casts when the blue bar under its HP fills. More stars, stronger skill.",
 "닫기":"Close","조합과 자리":"Synergies and rows","한별과 장군":"Hanbyeol and the generals","종족마다 다른 싸움":"How each folk fights","다시 하기":"Play again",
 "사기":"Buy",": 아래 상점에서 유닛을 눌러 사요. 산 유닛은 대기석(맨 아랫줄)에 들어와요.":": Tap a unit in the shop below. It goes to your bench (the bottom row).",
@@ -224,7 +224,7 @@ if(LANG==='en'){
   for(const o of [RACE,CLS,SYN,UNITS,SK,EN,TAC,DIFF,ITEMS,LEG,MEM,MAPN,MAPT,SPK,SCENES])i18nWalk(o);
   document.documentElement.lang='en';document.title=I18N[document.title]||document.title;
   /* home-screen name in English: iOS reads this meta, Android the manifest */
-  {const m=document.querySelector('meta[name=apple-mobile-web-app-title]');if(m)m.setAttribute('content','Star Guardians');
+  {const m=document.querySelector('meta[name=apple-mobile-web-app-title]');if(m)m.setAttribute('content','Dokkaebi Defense');
    const mf=document.querySelector('link[rel=manifest]');if(mf)mf.setAttribute('href','manifest-en.json');}
   const tw=document.createTreeWalker(document.getElementById('app'),NodeFilter.SHOW_TEXT);const ns=[];while(tw.nextNode())ns.push(tw.currentNode);
   for(const n of ns){const t=n.nodeValue.trim();if(t&&I18N[t]!==undefined)n.nodeValue=n.nodeValue.replace(t,I18N[t]);}

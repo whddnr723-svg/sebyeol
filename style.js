@@ -148,7 +148,7 @@ document.head.appendChild(Object.assign(document.createElement('style'),{textCon
 #sceneSkip{position:absolute;top:max(12px,env(safe-area-inset-top,0px));right:56px;padding:6px 12px;font-size:12px}
 body{word-break:keep-all;overflow-wrap:anywhere}
 #titleArt{display:block;width:calc(100% + 36px);margin:-18px -18px 10px;border-radius:14px 14px 0 0;image-rendering:pixelated;height:auto}
-.sheet h2.title{font-size:28px;margin:4px 0 6px;background:linear-gradient(#fff3c4,#ffc94d);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:1px}
+.sheet h2.title{font-size:28px;margin:4px 0 6px;background:linear-gradient(#fff3c4,#ffc94d);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:1px}.title small{display:block;font-size:15px;letter-spacing:3px;margin-top:2px}
 #muteBtn{width:32px;height:32px;border-radius:50%;padding:0;flex:none;display:grid;place-items:center}
 #muteBtn .off{display:none}#muteBtn.muted .off{display:inline}#muteBtn.muted .on{display:none}#muteBtn.muted{opacity:.6}
 #diff .sheet{position:relative}
