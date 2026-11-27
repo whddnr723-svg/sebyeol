@@ -25,7 +25,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>한별전: 도깨비 디펜스 · Dokkaebi Defense</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap">
-<script src="style.js?v=1128j" charset="utf-8"></script>
+<script src="style.js?v=1128l" charset="utf-8"></script>
 
 <div id="app">
   <div id="top">
@@ -77,19 +77,19 @@
   </div></div>
 </div>
 
-<script src="data.js?v=1128j" charset="utf-8"></script>
-<script src="field.js?v=1128j" charset="utf-8"></script>
-<script src="pixel.js?v=1128j" charset="utf-8"></script>
-<script src="hero.js?v=1128j" charset="utf-8"></script>
-<script src="people.js?v=1128j" charset="utf-8"></script>
-<script src="beasts.js?v=1128j" charset="utf-8"></script>
-<script src="spirits.js?v=1128j" charset="utf-8"></script>
-<script src="foes.js?v=1128j" charset="utf-8"></script>
-<script src="fx.js?v=1128j" charset="utf-8"></script>
-<script src="skills.js?v=1128j" charset="utf-8"></script>
-<script src="story.js?v=1128j" charset="utf-8"></script>
-<script src="en.js?v=1128j" charset="utf-8"></script>
-<script src="sfx.js?v=1128j" charset="utf-8"></script>
+<script src="data.js?v=1128l" charset="utf-8"></script>
+<script src="field.js?v=1128l" charset="utf-8"></script>
+<script src="pixel.js?v=1128l" charset="utf-8"></script>
+<script src="hero.js?v=1128l" charset="utf-8"></script>
+<script src="people.js?v=1128l" charset="utf-8"></script>
+<script src="beasts.js?v=1128l" charset="utf-8"></script>
+<script src="spirits.js?v=1128l" charset="utf-8"></script>
+<script src="foes.js?v=1128l" charset="utf-8"></script>
+<script src="fx.js?v=1128l" charset="utf-8"></script>
+<script src="skills.js?v=1128l" charset="utf-8"></script>
+<script src="story.js?v=1128l" charset="utf-8"></script>
+<script src="en.js?v=1128l" charset="utf-8"></script>
+<script src="sfx.js?v=1128l" charset="utf-8"></script>
 <script>
 (()=>{
 const $=id=>document.getElementById(id), rnd=n=>Math.floor(Math.random()*n);
@@ -231,9 +231,11 @@ function step(dt){if(!B)return;B.t+=dt;
     if(t&&a.taunt&&B.t<a.tauntU&&a.taunt.hp>0){t=a.taunt;bd=dist(a,t);}
     const sl=B.t<a.slowU?1-a.slowA:1;
     if(!t){if(a.side&&a.y<1)a.y+=a.sp*dt;continue;}
-    /* our melee holds its line until the enemy is inside the field, so fights happen where they can be seen */
-    if(bd>a.range&&!a.side&&a.range<1.5&&t.y<1.7&&a.y>2.2){a.moving=0;continue;}
-    if(bd>a.range){const v=a.sp*sl*dt/bd;a.x+=(t.x-a.x)*v;a.y+=(t.y-a.y)*v;a.moving=1;a.face=t.x<a.x-.05?-1:1;}
+    /* our melee holds its line while the enemy is still walking in, so fights happen where they can be seen;
+       an enemy that stopped up there to shoot is charged */
+    if(bd>a.range&&!a.side&&a.range<1.5&&t.y<1.7&&a.y>2.2&&t.moving){a.moving=0;continue;}
+    /* enemies that shoot keep walking until they are inside the field, so the fight stays in view */
+    if(bd>a.range||(a.side&&a.range>1.5&&a.y<1.7)){const v=a.sp*sl*dt/bd;a.x+=(t.x-a.x)*v;a.y+=(t.y-a.y)*v;a.moving=1;a.face=t.x<a.x-.05?-1:1;}
     else{a.moving=0;a.cd-=dt*sl;if(a.cd<=0){a.cd+=1/(a.as*(B.t<a.frenzy?1.4:1));attack(a,t,foes,a.side?N:P);}}}
   for(let i=0;i<E.length;i++)for(let j=i+1;j<E.length;j++){const a=E[i],b=E[j],d=dist(a,b),m=a.fly!==b.fly?0:.86;
     if(d<m&&d>.001){const p=(m-d)/2/d,dx=(a.x-b.x)*p,dy=(a.y-b.y)*p;a.x+=dx;a.y+=dy;b.x-=dx;b.y-=dy;}}
