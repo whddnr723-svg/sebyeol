@@ -61,7 +61,7 @@ const TAC={interest:['\ubd80\uc790\uc758 \uae08\uace0','\uc774\uc790\ub97c \ucd5
   loot:['\uc804\ub9ac\ud488','\uc9c0\uae08 \ubc14\ub85c 12\uace8\ub4dc\ub97c \ubc1b\uc544\uc694.'],mixed:['\ud63c\uc131 \ubd80\ub300','\ucf1c\uc9c4 \uc870\ud569 \ud558\ub098\ub9c8\ub2e4 \ubaa8\ub4e0 \uc544\uad70\uc758 \uacf5\uaca9 \uc18d\ub3c4\uac00 6% \ube68\ub77c\uc838\uc694.']};
 /* \ub09c\uc774\ub3c4: [\uc774\ub984, \uc801 \uccb4\ub825 \ubc30\uc218, \uc801 \uacf5\uaca9\ub825 \ubc30\uc218, \uc801 \uc22b\uc790 \ubc30\uc218] */
 const DIFF={normal:['\ubcf4\ud1b5',1.3,1.2,1],hard:['\uc5b4\ub824\uc6c0',1.5,1.32,1],hell:['\uc9c0\uc625',1.7,1.45,1.2]};
-const HP0=460,HPG=1.12,DMG0=50,DMGG=1.08,PT0=3,PTG=1.25;
+const HP0=400,HPG=1.12,DMG0=45,DMGG=1.08,PT0=3,PTG=1.25;
 /* attack motion per character */
 const MOT={sword:'slash',wolf:'maul',sling:'shoot',ember:'cast',hawk:'swoop',mage:'cast',rock:'smash',wind:'shoot',bear:'smash',fox:'cast',archer:'shoot',bolt:'cast',
   grunt:'slash',bat:'swoop',skull:'shoot',ogre:'smash',shield:'slash',shaman:'cast',bomber:'pounce',boss:'smash'};
@@ -100,7 +100,7 @@ Object.assign(MOT,{paladin:'slash',elder:'cast',phoenix:'shoot',wolfking:'pounce
 /* \uc804\uc124 \uc720\ub2db \uace0\uc720 \uc870\ud569: \ud310\uc5d0 \ub193\uc73c\uba74 \ud63c\uc790\uc11c \ucf1c\uc9c4\ub2e4 */
 const LEG={paladin:['\uc131\uae30\uc0ac\ub2e8','\ubaa8\ub4e0 \uc544\uad70\uc774 \ubc1b\ub294 \ud53c\ud574 -10%'],elder:['\uc6a9\uc655\uc758 \uc704\uc5c4','\ubaa8\ub4e0 \uc544\uad70\uc758 \uacf5\uaca9\ub825 +12%'],phoenix:['\ubd88\uba78\uc758 \ubd88\uaf43','\ubaa8\ub4e0 \uc544\uad70\uc774 3\ucd08\ub9c8\ub2e4 \uccb4\ub825 3% \ud68c\ubcf5'],wolfking:['\ubb34\ub9ac\uc758 \uc655','\ubaa8\ub4e0 \uc544\uad70\uc758 \uacf5\uaca9 \uc18d\ub3c4 +12%']};
 /* late-game growth (round 16 onward) and boss art that repeats every 20 rounds */
-const HPL=1.06,DMGL=1.035;
+const HPL=1.08,DMGL=1.05;
 const bossSpr=r=>GEN_AT[r]?GEN_AT[r]+':dark':r>=MAXR?'geumbyeol:dark':'boss'+[5,10,15,20][(Math.round(r/5)-1)%4];
 /* 11/27: \uc2a4\ud1a0\ub9ac \ubc18\uc601 \u2014 \uc138 \uc885\uc871(\uc138 \ubcc4), \uc8fc\uc778\uacf5 \ud55c\ubcc4, \uae08\ubcc4\uc758 5\ub300 \uc7a5\uad70 */
 RACE.human.n='\ud574\ubcc4';RACE.beast.n='\ub2ec\ubcc4';RACE.spirit.n='\uc0db\ubcc4';RACE.beast.c='#9fb4ff';RACE.spirit.c='#6fd3e6';
