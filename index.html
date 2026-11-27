@@ -25,7 +25,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>한별전: 도깨비 디펜스 · Dokkaebi Defense</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap">
-<script src="style.js?v=1128h" charset="utf-8"></script>
+<script src="style.js?v=1128j" charset="utf-8"></script>
 
 <div id="app">
   <div id="top">
@@ -77,19 +77,19 @@
   </div></div>
 </div>
 
-<script src="data.js?v=1128h" charset="utf-8"></script>
-<script src="field.js?v=1128h" charset="utf-8"></script>
-<script src="pixel.js?v=1128h" charset="utf-8"></script>
-<script src="hero.js?v=1128h" charset="utf-8"></script>
-<script src="people.js?v=1128h" charset="utf-8"></script>
-<script src="beasts.js?v=1128h" charset="utf-8"></script>
-<script src="spirits.js?v=1128h" charset="utf-8"></script>
-<script src="foes.js?v=1128h" charset="utf-8"></script>
-<script src="fx.js?v=1128h" charset="utf-8"></script>
-<script src="skills.js?v=1128h" charset="utf-8"></script>
-<script src="story.js?v=1128h" charset="utf-8"></script>
-<script src="en.js?v=1128h" charset="utf-8"></script>
-<script src="sfx.js?v=1128h" charset="utf-8"></script>
+<script src="data.js?v=1128j" charset="utf-8"></script>
+<script src="field.js?v=1128j" charset="utf-8"></script>
+<script src="pixel.js?v=1128j" charset="utf-8"></script>
+<script src="hero.js?v=1128j" charset="utf-8"></script>
+<script src="people.js?v=1128j" charset="utf-8"></script>
+<script src="beasts.js?v=1128j" charset="utf-8"></script>
+<script src="spirits.js?v=1128j" charset="utf-8"></script>
+<script src="foes.js?v=1128j" charset="utf-8"></script>
+<script src="fx.js?v=1128j" charset="utf-8"></script>
+<script src="skills.js?v=1128j" charset="utf-8"></script>
+<script src="story.js?v=1128j" charset="utf-8"></script>
+<script src="en.js?v=1128j" charset="utf-8"></script>
+<script src="sfx.js?v=1128j" charset="utf-8"></script>
 <script>
 (()=>{
 const $=id=>document.getElementById(id), rnd=n=>Math.floor(Math.random()*n);
@@ -361,7 +361,7 @@ function drawUnit(x,y,o){const st=o.star||1,ga=cx.globalAlpha,R=cs*(o.big?.62:[.
     if(o.pop>0){sx*=1+o.pop;sy*=1+o.pop;}
     if(o.die!=null)rot+=(1-o.die/.45)*1.3*(o.face||1);
     cx.save();cx.globalAlpha=ga*fa;cx.translate(x+ox,y+oy+R*.8);cx.rotate(rot);cx.scale(sx*(o.face||1),sy);const bs=o.spr.split(':')[0].replace(/^hanbyeol\d$/,'hanbyeol'),blink=((performance.now()/1000+(o.ph||0)*2.7)%3.4)<.13;
-    const md=o.die!=null||o.flash>0?1:o.atkT>0?(STRIKE[bs]?moveFrame(bs,o.n,1-o.atkT/.3):2):o.castT>0?(STRIKE[bs]?moveFrame(bs,o.n,1-o.castT/.45):2):o.moving?[3,0,4,0][Math.floor(performance.now()/120+(o.ph||0))%4]:blink?1:(STRIKE[bs]&&Math.floor(performance.now()/520+(o.ph||0))%2?7:0);cx.drawImage(sprite(o.spr,st,md,0),-R*1.12*SPRK*SPRW,R*.107-R*2.03*SPRK-R*2.24*SPRK*(SPRH-1),R*2.24*SPRK*SPRW,R*2.24*SPRK*SPRH);
+    const md=o.die!=null?1:o.atkT>0?(STRIKE[bs]?moveFrame(bs,o.n,1-o.atkT/.3):2):o.castT>0?(STRIKE[bs]?moveFrame(bs,o.n,1-o.castT/.45):2):o.flash>0?1:o.moving?[3,0,4,0][Math.floor(performance.now()/120+(o.ph||0))%4]:blink?1:(STRIKE[bs]&&Math.floor(performance.now()/520+(o.ph||0))%2?7:0);cx.drawImage(sprite(o.spr,st,md,0),-R*1.12*SPRK*SPRW,R*.107-R*2.03*SPRK-R*2.24*SPRK*(SPRH-1),R*2.24*SPRK*SPRW,R*2.24*SPRK*SPRH);
     cx.restore();}
   if(B&&o.max&&o.die==null)drawStatus(cx,cs,x,y,R,o,B.t);
   if(o.flash>0){cx.globalAlpha=ga*.55;cx.beginPath();cx.arc(x,y,R*.8,0,7);cx.fillStyle='#fff';cx.fill();cx.globalAlpha=ga;}

@@ -60,7 +60,7 @@ const TAC={interest:['\ubd80\uc790\uc758 \uae08\uace0','\uc774\uc790\ub97c \ucd5
   heal:['\uc57c\uc804 \ubcd1\uc6d0','\uc804\ud22c\uc5d0\uc11c \uc838\ub3c4 \uccb4\ub825\uc774 40% \ub35c \uae4e\uc5ec\uc694.'],star:['\ubcc4\uc758 \ucd95\ubcf5','\ubcc4 2\uac1c \uc774\uc0c1\uc778 \uc720\ub2db\uc758 \uacf5\uaca9\ub825\uc774 20% \uc62c\ub77c\uc694.'],
   loot:['\uc804\ub9ac\ud488','\uc9c0\uae08 \ubc14\ub85c 12\uace8\ub4dc\ub97c \ubc1b\uc544\uc694.'],mixed:['\ud63c\uc131 \ubd80\ub300','\ucf1c\uc9c4 \uc870\ud569 \ud558\ub098\ub9c8\ub2e4 \ubaa8\ub4e0 \uc544\uad70\uc758 \uacf5\uaca9 \uc18d\ub3c4\uac00 6% \ube68\ub77c\uc838\uc694.']};
 /* \ub09c\uc774\ub3c4: [\uc774\ub984, \uc801 \uccb4\ub825 \ubc30\uc218, \uc801 \uacf5\uaca9\ub825 \ubc30\uc218, \uc801 \uc22b\uc790 \ubc30\uc218] */
-const DIFF={normal:['\ubcf4\ud1b5',1.3,1.2,1.1],hard:['\uc5b4\ub824\uc6c0',1.5,1.32,1.15],hell:['\uc9c0\uc625',1.7,1.45,1.2]};
+const DIFF={normal:['\ubcf4\ud1b5',1.3,1.2,1],hard:['\uc5b4\ub824\uc6c0',1.5,1.32,1],hell:['\uc9c0\uc625',1.7,1.45,1.2]};
 const HP0=460,HPG=1.12,DMG0=50,DMGG=1.08,PT0=3,PTG=1.25;
 /* attack motion per character */
 const MOT={sword:'slash',wolf:'maul',sling:'shoot',ember:'cast',hawk:'swoop',mage:'cast',rock:'smash',wind:'shoot',bear:'smash',fox:'cast',archer:'shoot',bolt:'cast',
