@@ -250,7 +250,7 @@ PIXU.skull=(st,g,mood)=>pxSkull2(mood);
 PIXU.ogre=(st,g,mood)=>pxOgre2(mood);
 PIXU.shield=(st,g,mood)=>pxShield2(mood);
 PIXU.shaman=(st,g,mood)=>pxShaman2(mood);
-PIXU.bat=(st,g,mood)=>pxBat2(mood);STRIKE.bat=1;WEAPON.bat='claw';
+PIXU.bat=(st,g,mood)=>pxBat2(mood);
 PIXU.bomber=(st,g,mood)=>pxBomber2(mood);
-for(const k in DEMON){PIXU[k]=(st,g,mood)=>pxDemon2(k,mood);STRIKE[k]=1;WEAPON[k]=DEMON[k].w==='claw'?'claw':DEMON[k].w==='club'?'club':'blade';}
+for(const k in DEMON)PIXU[k]=(st,g,mood)=>pxDemon2(k,mood);
 PIXU.geumbyeol=(st,g,mood)=>pxGeumbyeol2(mood);

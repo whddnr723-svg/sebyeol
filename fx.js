@@ -131,14 +131,6 @@ function drawFx(cx,cs,W,f){
   cx.restore();
 }
 
-/* ---------- weapon arm: swings on its own around the shoulder ---------- */
-function armAngle(o){
-  const now=performance.now()/1000+(o.ph||0);
-  if(o.castT>0)return -Math.sin(o.castT/.45*Math.PI)*1.1;
-  if(!(o.atkT>0))return Math.sin(now*2.6)*.06;
-  const k=1-o.atkT/.3,st=k<.3?-k/.3:k<.5?-1+(k-.3)/.2*2:1-(k-.5)/.5;
-  return o.mot==='slash'?st*1.25:o.mot==='shoot'?Math.min(0,st)*.5+Math.max(0,st)*.25:-Math.abs(st)*.7;
-}
 /* ---------- a race's magic circle under a caster (school: tao / arcane / elem / hex), k = 0..1 progress ---------- */
 function drawSchool(cx,cs,x,y,R,school,c,k){const PI=Math.PI,a=Math.sin(k*PI),now=performance.now()/1000;cx.save();cx.globalAlpha=Math.min(1,a*1.4);cx.translate(x,y+R*.8);
   const rx=R*1.25,ry=R*.45;
